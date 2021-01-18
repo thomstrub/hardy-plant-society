@@ -9,14 +9,14 @@ export default function LoginPage(props){
     const [error, setError ]          = useState('')
     const [state, handleChange]       = useForm({
         email: '',
-        pw: '',
+        password: '',
     })
   
     const formRef = useRef();
 
     useEffect(() => {
       formRef.current.checkValidity() ? setValidForm(false) : setValidForm(true);
-    });
+    }, []);
 
     return (
         <>

@@ -1,97 +1,84 @@
-import React, {useState, useRef, useEffect } from 'react';
-import './SignupPage.css';
-import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
-import { useForm } from '../../hooks/useForm';
+import React, { useState } from 'react';
 import userService from '../../utils/userService';
+import { useHistory } from 'react-router-dom';
+import SignupForm from '../../components/Forms/SignupForm/SignupForm'
 
 export default function SignUpPage(props){
-    const [invalidForm, setValidForm] = useState(false);
-    const [error, setError ]          = useState('')
-    const [state, handleChange]       = useForm({
-        username: '',
-        email: '',
-        password: '',
-        passwordConf: ''    
+  const [invalidForm, setValidForm] = useState(false)
+  const [error, setError ] = useState('')
+  const [selectedFile, setSelectedFile] = useState('')
+  const [state, setState]  = useState({
+    username: '',
+    email: '',
+    password: '',
+    passwordConf: '',
+    bio: '',
+    isAdmin: false
+  });
+
+  const history = useHistory()
+  
+  function handleChange(e){
+    setState({
+      ...state,
+      [e.target.name]: e.target.value
     })
-   
+  }
 
-    const formRef = useRef();
+  async function handleSubmit(e){
+    // add this later
+    e.preventDefault();
 
-    useEffect(() => {
-      formRef.current.checkValidity() ? setValidForm(false) : setValidForm(true);
-    });
+    // Photos have to be sent over as FormData
+    // They send over the form in multiparts (multipe requests to the server)
+
+    const formData = new FormData();
+    formData.append('photo', selectedFile);
 
 
+    // generating rest of form data by looping over the state object!
+    for (let key in state){
+      formData.append(key, state[key])
+    }
+    //fyi if you log out formData you won't see anything you have to use the folllowing
 
+    // Display the key/value pairs
+    // for (var pair of formData.entries()) {
+    //   console.log(pair[0]+ ', ' + pair[1]); 
+    // }
+
+    // SO now we have are data prepared to send over in our formData object
+    try {
+      // refere to the utils/userService, to look at the signup fetch function
+      await userService.signup(formData);
+      // setTheUser in our app
+      props.handleSignUpOrLogin() // gets the token from localstorage and updates the user state in our app.js
+      // with the correct user object from the current token
+      // then route to the homepage
+      history.push('/') // defined above from react-router-dom
+      // after this we can go whereever
+
+    } catch(err){
+      console.log(err.message)
+      setError(err.message)
+    }
+
+  }
+
+  function handleFileInput(e){
+    setSelectedFile(e.target.files[0])
+  }
+ 
+    
     return (
-        <>
-          <h1>Sign Up</h1>
-          <form  autoComplete="off" ref={formRef} onSubmit={async (e) => {
-            e.preventDefault()
-            console.log(state, ' this is state')
-            try {
-                await userService.signup(state);
-                // Route to wherever you want!
-                alert("You're logged in! Time to Code where you want to go Now! ~ SignupComponent")
-              } catch (err) {
-                // Invalid user data (probably duplicate email)
-                console.log(err.message)
-                setError(err.message)
-              }
-          }}>
-            <div className="form-group">
-              <input
-                className="form-control"
-                name="username"
-                placeholder="username"
-                value={state.username}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <input
-                type="email"
-                className="form-control"
-                name="email"
-                placeholder="email"
-                value={ state.email}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <input
-                className="form-control"
-                name="password"
-                type="password"
-                placeholder="password"
-                value={ state.password}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <input
-                className="form-control"
-                name="passwordConf"
-                type="password"
-                placeholder="Confirm Password"
-                value={ state.passwordConf}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <button
-              type="submit"
-              className="btn"
-              disabled={invalidForm}
-            >
-              Signup
-            </button>
-          </form>
-
-          {error ? <ErrorMessage error={error} /> : null}
-        </>
-      );
+        <SignupForm 
+          handleChange={handleChange} 
+          handleSubmit={handleSubmit} 
+          handleFileInput={handleFileInput}
+          state={state}
+          error={error}
+          invalidForm={invalidForm}
+        />
+      );   
+    
 }

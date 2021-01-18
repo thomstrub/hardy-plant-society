@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const SECRET = process.env.SECRET;
 
 module.exports = function(req, res, next) {
+  console.log(req, "req from auth")
   // Check for the token being sent in three different ways
   let token = req.get('Authorization') || req.query.token || req.body.token;
   if (token) {
@@ -13,7 +14,8 @@ module.exports = function(req, res, next) {
         next(err);
       } else {
         // It's a valid token, so add user to req
-        req.user = decoded.user;    
+        req.user = decoded.user;
+        console.log(req.user, "req.user from auth")    
         next();
       }
     });
