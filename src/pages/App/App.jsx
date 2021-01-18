@@ -27,7 +27,7 @@ function App() {
               <h1>Home Page</h1>
           </Route>
           <Route exact path="/login">
-             <LoginPage />
+             <LoginPage handleSignUpOrLogin={handleSignUpOrLogin}/>
           </Route>
           <Route exact path="/signup">
              <SignupPage handleSignUpOrLogin={handleSignUpOrLogin}/>

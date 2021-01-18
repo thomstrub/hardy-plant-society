@@ -43,7 +43,7 @@ export default function SignupForm({handleChange, handleSubmit, handleFileInput,
                       onChange={handleChange}
                       required
                     />
-                    <Form.TextArea label='bio' placeholder='Tell us more about your dogs...' name="bio" onChange={handleChange}/>
+                    <Form.TextArea label='bio' placeholder='Tell us about your favorite plants...' name="bio" onChange={handleChange}/>
                     <Form.Field> 
                         <Form.Input
                           type="file"
