@@ -3,13 +3,6 @@ import { Dimmer, Loader, Image, Segment } from 'semantic-ui-react'
 
 const Loading = () => (
   <div>
-    <Segment>
-      <Dimmer active>
-        <Loader>Loading</Loader>
-      </Dimmer>
-
-      <Image src='/images/wireframe/short-paragraph.png' />
-    </Segment>
 
     <Segment>
       <Dimmer active inverted>
