@@ -25,7 +25,7 @@ function App() {
     <div className="App">
       <Switch>
           <Route exact path="/">
-              <h1>Home Page</h1>
+              <h1>{user.isAdmin ? "Admin Home" : "Home Page"}</h1>
           </Route>
           <Route exact path="/login">
              <LoginPage handleSignUpOrLogin={handleSignUpOrLogin}/>

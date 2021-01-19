@@ -8,7 +8,7 @@ export default function SignupForm({handleChange, handleSubmit, handleFileInput,
         <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
           <Grid.Column style={{ maxWidth: 450 }}>
               <Header as='h2' color='green' textAlign='center'>
-                <Image src='https://i.imgur.com/16jlIbf.jpeg' circular/> Sign Up    
+                <Image src='https://i.imgur.com/16jlIbf.jpeg' circular/> {state.isAdmin ? "Admin Sign Up" : "Sign Up"}    
               </Header>            
                 <Form autoComplete="off"  onSubmit={handleSubmit}>
                 <Segment stacked>               
@@ -27,6 +27,16 @@ export default function SignupForm({handleChange, handleSubmit, handleFileInput,
                       onChange={handleChange}
                       required
                     />
+                    {!state.isAdmin ? "" : (
+                        <Form.Input             
+                      name="adminPw"
+                      type="password"
+                      placeholder="admin password"
+                      value={ state.adminPw}
+                      onChange={handleChange}
+                      required
+                    />)
+                    }
                     <Form.Input             
                       name="password"
                       type="password"
