@@ -13,7 +13,7 @@ export default function SignUpPage(props){
     password: '',
     passwordConf: '',
     bio: '',
-    isAdmin: false
+    isAdmin: props.admin ? true : false
   });
 
   const history = useHistory()
