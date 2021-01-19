@@ -4,6 +4,7 @@ import './App.css';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import userService from '../../utils/userService'
+import AdminSignupPage from '../AdminSignupPage/AdminSignupPage';
 
 function App() {
   // getUser decodes the JWT token into a javascript object
@@ -31,6 +32,9 @@ function App() {
           </Route>
           <Route exact path="/signup">
              <SignupPage handleSignUpOrLogin={handleSignUpOrLogin}/>
+          </Route>
+          <Route exact path="/admin">
+             <AdminSignupPage handleSignUpOrLogin={handleSignUpOrLogin}/>
           </Route>
       </Switch>
     </div>
