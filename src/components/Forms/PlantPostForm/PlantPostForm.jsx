@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Button, Form, Segment } from 'semantic-ui-react'
+import { Button, Form, Radio, Segment } from 'semantic-ui-react'
 
 export default function PlantPostForm(props){
   const [selectedFile, setSelectedFile] = useState('')
@@ -11,7 +11,8 @@ export default function PlantPostForm(props){
     dateCollected: new Date(),
     quantity: 1,
     description: "",
-    photoUrl: ""
+    photoUrl: "",
+    plantName:""
 
   })
 
@@ -26,13 +27,20 @@ export default function PlantPostForm(props){
       [e.target.name]: e.target.value
     })
   }
-
+  function handleToggle(e){
+      setState({
+          ...state,
+          isSeed: state.isSeed ? false : true,
+          isRootstock: state.isSeed ? false : true
+      })
+      
+  }
   function handleSubmit(e){
     e.preventDefault()
              
     const formData = new FormData()
     formData.append('photo', selectedFile)
-    formData.append('caption', state.caption)
+    formData.append('description', state.description)
     props.handleAddPost(formData)
     // Have to submit the form now! We need a function!
   }
@@ -44,12 +52,26 @@ export default function PlantPostForm(props){
         <Segment>
         
             <Form  autoComplete="off" onSubmit={handleSubmit}>
-            
+              <h3>What are you contributing?</h3>
+              <Radio label={state.isSeed ? "Seeds" : "Rootstock"} toggle value={state.isSeed} onChange={handleToggle}/>
+              {state.isSeed ? 
+              <p>Collected seeds, or a plant that has set seed and can be harvested</p>
+              :
+              <p>Mature plant with established roots or runners that can transplanted.</p>
+              }
               <Form.Input
                   className="form-control"
-                  name="caption"
-                  value={state.caption}
-                  placeholder="What's on your pups mind?"
+                  name="plantName"
+                  value={state.plantName}
+                  placeholder="Common name or Scientific name"
+                  onChange={handleChange}
+                  required
+              />
+              <Form.Input
+                  className="form-control"
+                  name="description"
+                  value={state.description}
+                  placeholder={state.isSeed ? "Describe your collection of seeds or plant that has set seed" : "Describe your rootstock or runners that are ready to be transplanted"}
                   onChange={handleChange}
                   required
               />   
@@ -64,7 +86,7 @@ export default function PlantPostForm(props){
                 type="submit"
                 className="btn"
               >
-                ADD PUPPY
+                SUBMIT
               </Button>
             </Form>
           </Segment>

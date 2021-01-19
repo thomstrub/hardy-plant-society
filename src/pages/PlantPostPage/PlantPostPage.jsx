@@ -3,7 +3,8 @@ import './PlantPostPage.css';
 import PlantPostForm from '../../components/Forms/PlantPostForm/PlantPostForm'
 import LoadingMsg from '../../components/LoadingMsg/LoadingMsg'
 import * as plantPostAPI from '../../utils/plantPostService'
-import { use } from '../../../routes/api/users';
+import {  Grid } from 'semantic-ui-react'
+
 // create PlantPost service folder, add functions
 
 export default function PlantPostPage(){
@@ -12,7 +13,7 @@ export default function PlantPostPage(){
     
     async function handleAddPost(post){
         setLoading(true);
-        const data = await postsAPI.create(post);
+        const data = await plantPostAPI.create(post);
 
         // to check to make sure this is working
         console.log(data, ' data')
@@ -29,11 +30,24 @@ export default function PlantPostPage(){
 
     return (
         <>
-            {loading ?
-                <LoadingMsg />
-                :
-                <PlantPostForm/>
-            }
+            <Grid centered >
+            <Grid.Row>
+            <Grid.Column>
+                Header
+            </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+            <Grid.Column style={{ maxWidth: 750 }}>
+                {loading ?
+                    <LoadingMsg />
+                    :
+                    
+                    <PlantPostForm handleAddPost={handleAddPost}/>
+                }
+            </Grid.Column>
+            </Grid.Row>
+        </Grid>
+            
         </>
     )
 }

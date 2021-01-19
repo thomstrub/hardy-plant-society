@@ -5,6 +5,7 @@ import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import userService from '../../utils/userService'
 import AdminSignupPage from '../AdminSignupPage/AdminSignupPage';
+import PlantPostPage from '../PlantPostPage/PlantPostPage';
 
 function App() {
   // getUser decodes the JWT token into a javascript object
@@ -26,6 +27,9 @@ function App() {
       <Switch>
           <Route exact path="/">
               <h1>{user.isAdmin ? "Admin Home" : "Home Page"}</h1>
+          </Route>
+          <Route exact path="/plantswap">
+             <PlantPostPage />
           </Route>
           <Route exact path="/login">
              <LoginPage handleSignUpOrLogin={handleSignUpOrLogin}/>
