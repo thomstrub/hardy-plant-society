@@ -15,7 +15,8 @@ function create(req, res){
         const params = {Bucket: 'travelgo', Key: filePath, Body: req.file.buffer};
         s3.upload(params, async function(err, data){
                 // data.Location is the address where our image is stored on aws
-            const post = await PlantPost.create({caption: req.body.caption, user: req.user, photoUrl: data.Location});
+            const post = await PlantPost.create({description: req.body.description, quantity: req.body.quantity,
+                 dateCollected: req.body.dateCollected, user: req.user, photoUrl: data.Location});
             const populatedUserPost = await post.populate('user').execPopulate();
             res.status(201).json({post: populatedUserPost})
         })
