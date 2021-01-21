@@ -3,10 +3,17 @@ import { Button, Form, Radio, Segment } from 'semantic-ui-react'
 import SemanticDatepicker from 'react-semantic-ui-datepickers';
 import 'react-semantic-ui-datepickers/dist/react-semantic-ui-datepickers.css';
 import PlantSearchBar from './PlantSearchBar'
+import PlantSearchResults from './PlantSearchResults'
 
 
 
 export default function PlantPostForm(props){
+
+ // Trefle API variables
+ const KEY = process.env.TREFLETOKEN
+ const TREFLE_BASE_URL = `https://trefle.io/api/v1/species/search?token=nGl9aJhLyHSPDXgy_7THrf3UycmVNDpcU4kvluaWwZQ&q=`
+ const proxyurl = "https://cors-anywhere.herokuapp.com/";
+
     //---------------------------------------- state hooks --------------------------------------//
    // Image to be uploaded to AWS 
   const [selectedFile, setSelectedFile] = useState('')
@@ -19,24 +26,23 @@ export default function PlantPostForm(props){
     quantity: 1,
     description: "",
     photoUrl: "",
-    plantName:""
+    plant: {}
 
   })
 
-
-  // Trefle API variables
-const KEY = process.env.TREFLETOKEN
-const TREFLE_BASE_URL = `https://trefle.io/api/v1/plants/search?token=nGl9aJhLyHSPDXgy_7THrf3UycmVNDpcU4kvluaWwZQ&q=`
+  // Plant Search Results state
+  const [selectState, setSelectState] = useState('');
 
 
   // Trefle API data
   const [trefleData, setTrefleData] = useState("");
   const [searchTag, setSearchTag] = useState("");
   const [toggle, setToggle] = useState(true);
-
-  // Trefle API Call
+  const [selectData, setSelectData] = useState([]);
+  const [selectedPlantData, setSelectedPlantData] = useState({})
+//---------------------------------------- useEffect --------------------------------------//
+  // Trefle Search API Call
   useEffect(() => {
-    const proxyurl = "https://cors-anywhere.herokuapp.com/";
     console.log(searchTag, "useEffect searchTag");
     const trefleUrl = `${TREFLE_BASE_URL}${searchTag}`;
     fetch(proxyurl + trefleUrl)
@@ -44,17 +50,65 @@ const TREFLE_BASE_URL = `https://trefle.io/api/v1/plants/search?token=nGl9aJhLyH
       .then((data) => {
         console.log(data.data, "json data");
         setTrefleData(data.data);
+        
       });
   }, [toggle]);
+  
+  // creates array for select menu from Trefle Data
+  useEffect(() => {
+    if(trefleData){
+        let mappedData = trefleData.map((result, index) => {
+            return ({
+                key: result.slug,
+                text: result.common_name ? result.common_name + " / " + result.scientific_name : result.scientific_name,
+                value: result.slug,
+                image: { avatar: true, src: result.image_url }
+            })
+        });
+        setSelectData(mappedData);
+        console.log(selectData, "<----selectData from useEffect")
+    }
+  }, [trefleData]);
+
+  // builds plant data for database from selected plant
+  // Plant Specific API Call
+  useEffect(() => {
+    console.log(selectState, "<-----selectData")
+    const treflePlantUrl = `https://trefle.io/api/v1/plants/${selectState}?token=nGl9aJhLyHSPDXgy_7THrf3UycmVNDpcU4kvluaWwZQ`;
+    fetch(proxyurl + treflePlantUrl)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data.data.main_species, "json data from selected plant");
+        setSelectedPlantData(data.data.main_species);
+        console.log(selectedPlantData, "Selected Plant Data")
+        
+      });
+    }, [selectState]);
+  
+
 
   //---------------------------------------- functions- handlers / submit --------------------------------------//
 
+  // Trefle API submit handler
+  const handleTrefleSubmit = (e, tag) => {
+    e.preventDefault()
+    console.log("From App - making API Call - tag - >", tag);
+    setSearchTag(tag);
+    setToggle(!toggle);
+  };
 
+    // Plant Search Results hanlder
+    function handleSelectChange(e, result){
+        setSelectState(result.value)
+        console.log(result, "dropdown Change")
+        }
+
+  // Photo File
   function handleFileInput(e){
     setSelectedFile(e.target.files[0])
   }
 
-  
+  // update values for text fields
   function handleChange(e){
     setState({
       ...state,
@@ -80,13 +134,7 @@ const TREFLE_BASE_URL = `https://trefle.io/api/v1/plants/search?token=nGl9aJhLyH
   }
 
 
-  // Trefle API submit handler
-  const handleTrefleSubmit = (e, tag) => {
-    e.preventDefault()
-    console.log("From App - making API Call - tag - >", tag);
-    setSearchTag(tag);
-    setToggle(!toggle);
-  };
+  
 
 
   //main form submit handler
@@ -131,6 +179,7 @@ const TREFLE_BASE_URL = `https://trefle.io/api/v1/plants/search?token=nGl9aJhLyH
               />
               
               <PlantSearchBar handleSubmit={handleTrefleSubmit} />
+              <PlantSearchResults selectData={selectData} handleChange={handleSelectChange} selectState={selectState}/>
 
               <Form.Input
                   className="form-control"
