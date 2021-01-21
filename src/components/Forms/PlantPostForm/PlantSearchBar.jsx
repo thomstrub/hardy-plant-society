@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Form, Segment } from 'semantic-ui-react'
+import './PlantPostForm.css';
 
 export default function PlantSearchBar(props) {
   const [searchTag, setSearchTag] = useState("");
@@ -25,7 +26,9 @@ export default function PlantSearchBar(props) {
           placeholder="Search common or scientific name"
           onChange={handleChange}
         />
-        <Button onClick={handleSubmit} value="Search">Search</Button>
+        <div id="div">
+        <Button  onClick={handleSubmit} value="Search" id="right">Search</Button>
+        </div>
     </>
   );
 }

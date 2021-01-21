@@ -1,0 +1,9 @@
+#div {
+    display: flex;
+}
+
+#right{
+    margin-left: auto;
+    margin-top: -5px;
+    margin-bottom: 5px;
+}

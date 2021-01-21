@@ -44,7 +44,7 @@ export default function PlantPostForm(props){
   // Trefle Search API Call
   useEffect(() => {
     console.log(searchTag, "useEffect searchTag");
-    const trefleUrl = `${TREFLE_BASE_URL}${searchTag}`;
+    const trefleUrl = `${TREFLE_BASE_URL}${searchTag.replace(/\s/g, '&')}`;
     fetch(proxyurl + trefleUrl)
       .then((res) => res.json())
       .then((data) => {
@@ -81,7 +81,20 @@ export default function PlantPostForm(props){
         console.log(data.data.main_species, "json data from selected plant");
         setSelectedPlantData(data.data.main_species);
         console.log(selectedPlantData, "Selected Plant Data")
+        if(selectedPlantData){
+            setState({
+                ...state,
+                plant: {
+                    commonName: (selectedPlantData.common_name ? selectedPlantData.common_name: null),
+                    genus: selectedPlantData.genus,
+                    species: selectedPlantData.scientific_name,
+                    description: `From the family ${selectedPlantData.family} ${selectedPlantData.family_common_name ? selectedPlantData.family_common_name : '' }. Observed as a native species from ${selectedPlantData.observations}.`,
+                    photoUrl: selectedPlantData.image_url
+                }
+            })
+        }
         
+        console.log(state, "state from after the API data")
       });
     }, [selectState]);
   
@@ -149,7 +162,7 @@ export default function PlantPostForm(props){
     formData.append('dateCollected', state.dateCollected)
     formData.append('quantity', state.quantity)
     formData.append('description', state.description)
-    formData.append('plantName', state.plantName)
+    formData.append('plant', state.plant)
     props.handleAddPost(formData)
     
   }
@@ -169,14 +182,7 @@ export default function PlantPostForm(props){
               <p>Mature plant with established roots or runners that can transplanted.</p>
               }
               
-              <Form.Input
-                  className="form-control"
-                  name="plantName"
-                  value={state.plantName}
-                  placeholder="Common name or Scientific name"
-                  onChange={handleChange}
-                  required
-              />
+            
               
               <PlantSearchBar handleSubmit={handleTrefleSubmit} />
               <PlantSearchResults selectData={selectData} handleChange={handleSelectChange} selectState={selectState}/>
