@@ -5,7 +5,7 @@ export default function RadioComponent(props) {
   
 
     return (
-      <Form>
+      <>
         <Form.Field>
           <Radio
             label='Rootstock'
@@ -24,6 +24,6 @@ export default function RadioComponent(props) {
             onChange={props.handleChange}
           />
         </Form.Field>
-      </Form>
+      </>
     )
   }

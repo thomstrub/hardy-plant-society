@@ -73,6 +73,13 @@ export default function PlantPostForm(props){
     }
   }, [trefleData]);
 
+  useEffect(() => {
+    setState({
+        ...state,
+        plant: selectState
+    })
+  }, [selectState])
+
 //   // builds plant data for database from selected plant
 //   // Plant Specific API Call
 //   useEffect(() => {
@@ -177,10 +184,7 @@ export default function PlantPostForm(props){
   //main form submit handler
   function handleSubmit(e){
 
-    setState({
-        ...state,
-        plant: selectState
-    })
+
 
     e.preventDefault()
              
