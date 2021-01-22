@@ -7,6 +7,7 @@ const upload = multer();
 
 router.post('/',upload.single('photo'), plantSwapCtrl.create);
 router.get('/', plantSwapCtrl.index);
+router.get('/api/:searchTag', plantSwapCtrl.searchTrefle);
 router.get('/:id', plantSwapCtrl.show);
 
 

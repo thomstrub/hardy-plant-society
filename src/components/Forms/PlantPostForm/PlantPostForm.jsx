@@ -5,12 +5,12 @@ import 'react-semantic-ui-datepickers/dist/react-semantic-ui-datepickers.css';
 import PlantSearchBar from './PlantSearchBar'
 import PlantSearchResults from './PlantSearchResults'
 import RadioComponent from './RadioComponent'
-
+import * as plantPostAPI from '../../../utils/plantPostService'
 
 export default function PlantPostForm(props){
 
  // Trefle API variables
- const KEY = process.env.TREFLETOKEN
+ const KEY = process.env.KEY
  const TREFLE_BASE_URL = `https://trefle.io/api/v1/species/search?token=nGl9aJhLyHSPDXgy_7THrf3UycmVNDpcU4kvluaWwZQ&q=`
  const proxyurl = "https://cors-anywhere.herokuapp.com/";
 
@@ -44,18 +44,36 @@ export default function PlantPostForm(props){
   const [selectData, setSelectData] = useState([]);
   const [selectedPlantData, setSelectedPlantData] = useState({})
 //---------------------------------------- useEffect --------------------------------------//
-  // Trefle Search API Call
-  useEffect(() => {
-    console.log(searchTag, "useEffect searchTag");
-    const trefleUrl = `${TREFLE_BASE_URL}${searchTag.replace(/\s/g, '&')}`;
-    fetch(proxyurl + trefleUrl)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data.data, "json data");
-        setTrefleData(data.data);
+//   // Trefle Search API Call
+//   useEffect(() => {
+//     console.log(searchTag, "useEffect searchTag");
+//     console.log(KEY, "KEY <--------------")
+//     const trefleUrl = `${TREFLE_BASE_URL}${searchTag.replace(/\s/g, '&')}`;
+//     fetch(proxyurl + trefleUrl)
+//       .then((res) => res.json())
+//       .then((data) => {
+//         console.log(data.data, "json data");
+//         setTrefleData(data.data);
         
-      });
-  }, [searchTag]);
+//       });
+//   }, [searchTag]);
+
+   // Back end Trefle search request 
+  
+   async function getTrefleData(search){
+   
+   try {
+     const data = await plantPostAPI.searchTrefle(search);
+     console.log(data.json.data, "data from postform page")
+     setTrefleData([...data.json.data])
+   } catch(err){
+     console.log(err, ' this is the error')
+   }
+   }  
+
+   useEffect(() => {
+       getTrefleData(searchTag)
+   }, [searchTag])
   
   // creates array for select menu from Trefle Data
   useEffect(() => {
@@ -87,7 +105,7 @@ export default function PlantPostForm(props){
   const handleTrefleSubmit = (e, tag) => {
     e.preventDefault()
     console.log("From App - making API Call - tag - >", tag);
-    setSearchTag(tag);
+    setSearchTag(tag.replace(/\s/g, '&'));
     setToggle(!toggle);
   };
 

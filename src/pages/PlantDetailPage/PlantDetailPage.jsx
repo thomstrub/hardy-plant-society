@@ -21,7 +21,7 @@ export default function PlantDetailPage({ user, handleLogout }) {
 
         try {
 
-            // return just the last part of pathname, which should be the id # for the post
+            // *HARDCODED* substring(10) returns the pathname after /plantswap specifically.
             const plantDetail = location.pathname.substring(10)
           
             console.log(plantDetail)

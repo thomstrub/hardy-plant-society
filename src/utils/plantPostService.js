@@ -44,3 +44,13 @@ export function getOne(plantId) {
     })
     .then(res => res.json());
   }
+
+
+  export function searchTrefle(searchTerm) {
+      return fetch(BASE_URL + "api/" + searchTerm, {
+        headers: {
+            'Authorization': 'Bearer ' + tokenService.getToken()
+          }
+      })
+      .then(res => res.json());
+  }
