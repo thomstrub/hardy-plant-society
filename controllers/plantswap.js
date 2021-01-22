@@ -93,5 +93,11 @@ async function index(req, res){
 }
 
 async function show(req, res){
-    console.log("hitting the show route");
+    console.log(req, "req <------------- hitting the show route");
+    try{
+        const post = await PlantPost.findOne({_id: req.params.id}).populate('plant').populate('user').exec()
+        res.status(200).json({post})
+    } catch(err){
+        return res.status(401).json(err)
+    }
 }

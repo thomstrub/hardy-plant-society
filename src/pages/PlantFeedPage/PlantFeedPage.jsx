@@ -3,11 +3,26 @@ import React, { useState, useEffect } from 'react';
 import PlantFeed from '../../components/PlantFeed/PlantFeed';
 
 import {  Grid } from 'semantic-ui-react'
+import * as plantPostAPI from '../../utils/plantPostService'
 
-export default function Feed({user, posts, handleLogout}){  
+export default function Feed({user}){  
 
 
+      // Plant Posts are created and set as state
+  const [posts, setPosts] = useState([]);
+  async function getPosts(){
+    
+    try {
+      const data = await plantPostAPI.getAll();
+      setPosts([...data.posts])
+    } catch(err){
+      console.log(err, ' this is the error')
+    }
+  }  
 
+  useEffect(() => {
+    getPosts()
+  }, [])
     
 
 

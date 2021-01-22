@@ -27,7 +27,7 @@ function PlantCard({post, isProfile, user, addLike, removeLike}) {
       }
       <Image src={`${post.photoUrl}`} wrapped ui={false} />
       <Card.Content>
-      <Link to={`/plantswap/post._id`}>
+      <Link to={`/plantswap/${post._id}`}>
         <Card.Description>
             {post.description}
         </Card.Description>

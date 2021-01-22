@@ -8,7 +8,7 @@ import userService from '../../utils/userService'
 import AdminSignupPage from '../AdminSignupPage/AdminSignupPage';
 import PlantPostCreatePage from '../PlantPostCreatePage/PlantPostCreatePage';
 import PlantFeedPage from '../PlantFeedPage/PlantFeedPage';
-
+import PlantDetailPage from '../PlantDetailPage/PlantDetailPage'
 
 function App() {
   // getUser decodes the JWT token into a javascript object
@@ -26,8 +26,7 @@ function App() {
     setUser({user: null});
   }
 
-  // Plant Posts are created and set as state
-  const [posts, setPosts] = useState([]);
+  
   const [loading, setLoading] = useState(false);
   
   async function handleAddPost(post){
@@ -39,24 +38,11 @@ function App() {
       // data is the response from our create function in controllers/posts
       // update the state
       setLoading(false);
-      setPosts([data.post,  ...posts])
+      // setPosts([data.post,  ...posts])
       // to conifrm this check the devtools for your feed component
       
   }
 
-  async function getPosts(){
-    
-    try {
-      const data = await plantPostAPI.getAll();
-      setPosts([...data.posts])
-    } catch(err){
-      console.log(err, ' this is the error')
-    }
-  }  
-
-  useEffect(() => {
-    getPosts()
-  }, [])
 
   return (
     <div className="App">
@@ -68,7 +54,10 @@ function App() {
              <PlantPostCreatePage user={user} handleAddPost={handleAddPost} loading={loading}/>
           </Route>
           <Route exact path="/plantswap/">
-             <PlantFeedPage user={user} posts={posts} handleLogout={handleLogout}/>
+             <PlantFeedPage user={user} handleLogout={handleLogout}/>
+          </Route>
+          <Route path="/plantswap/:id">
+             <PlantDetailPage user={user} handleLogout={handleLogout}/>
           </Route>
           <Route exact path="/login">
              <LoginPage handleSignUpOrLogin={handleSignUpOrLogin}/>

@@ -9,7 +9,7 @@ import { useLocation } from 'react-router-dom';
 
 export default function PlantDetailPage({ user, handleLogout }) {
 
-    const [posts, setPosts] = useState([])
+    const [post, setPost] = useState({})
     // const [profileUser, setProfileUser] = useState({})
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState('')
@@ -26,10 +26,9 @@ export default function PlantDetailPage({ user, handleLogout }) {
             // This gets the username from the url! 
             console.log(plantDetail)
             const data = await plantPostService.getOne(plantDetail);
-            console.log(data)
+            console.log(data, "<--------- data from getShow")
             setLoading(() => false)
-            setPosts(() => [...data.posts])
-            setProfileUser(() => data.user)
+            setPost(() => [...data.post])
         } catch (err) {
             console.log(err)
             setError(err)
@@ -64,7 +63,7 @@ export default function PlantDetailPage({ user, handleLogout }) {
                 <Grid>
                     <Grid.Row>
                         <Grid.Column>
-                            <PageHeader user={user} handleLogout={handleLogout} />
+                            {/* <PageHeader user={user} handleLogout={handleLogout} /> */}
                         </Grid.Column>
                     </Grid.Row>
                     <Grid.Row>
