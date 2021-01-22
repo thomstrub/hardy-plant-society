@@ -1,12 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button, Form, Radio, Segment } from 'semantic-ui-react'
 import SemanticDatepicker from 'react-semantic-ui-datepickers';
 import 'react-semantic-ui-datepickers/dist/react-semantic-ui-datepickers.css';
 import PlantSearchBar from './PlantSearchBar'
-
+import PlantSearchResults from './PlantSearchResults'
+import RadioComponent from './RadioComponent'
 
 
 export default function PlantPostForm(props){
+
+ // Trefle API variables
+ const KEY = process.env.TREFLETOKEN
+ const TREFLE_BASE_URL = `https://trefle.io/api/v1/species/search?token=nGl9aJhLyHSPDXgy_7THrf3UycmVNDpcU4kvluaWwZQ&q=`
+ const proxyurl = "https://cors-anywhere.herokuapp.com/";
+
     //---------------------------------------- state hooks --------------------------------------//
    // Image to be uploaded to AWS 
   const [selectedFile, setSelectedFile] = useState('')
@@ -19,42 +26,84 @@ export default function PlantPostForm(props){
     quantity: 1,
     description: "",
     photoUrl: "",
-    plantName:""
+    plant: "",
+    cultivar: ""
 
   })
 
+  // Plant Search Results state
+  const [selectState, setSelectState] = useState('');
 
-  // Trefle API variables
-const KEY = process.env.TREFLETOKEN
-const TREFLE_BASE_URL = `https://trefle.io/api/v1/plants/search?token=nGl9aJhLyHSPDXgy_7THrf3UycmVNDpcU4kvluaWwZQ&q=`
-
+  // Radio Toggle State
+  const [radioToggle, setRadioToggle] = useState(true);
 
   // Trefle API data
   const [trefleData, setTrefleData] = useState("");
   const [searchTag, setSearchTag] = useState("");
   const [toggle, setToggle] = useState(true);
-
-  // Trefle API Call
+  const [selectData, setSelectData] = useState([]);
+  const [selectedPlantData, setSelectedPlantData] = useState({})
+//---------------------------------------- useEffect --------------------------------------//
+  // Trefle Search API Call
   useEffect(() => {
-    const proxyurl = "https://cors-anywhere.herokuapp.com/";
     console.log(searchTag, "useEffect searchTag");
-    const trefleUrl = `${TREFLE_BASE_URL}${searchTag}`;
+    const trefleUrl = `${TREFLE_BASE_URL}${searchTag.replace(/\s/g, '&')}`;
     fetch(proxyurl + trefleUrl)
       .then((res) => res.json())
       .then((data) => {
         console.log(data.data, "json data");
         setTrefleData(data.data);
+        
       });
-  }, [toggle]);
+  }, [searchTag]);
+  
+  // creates array for select menu from Trefle Data
+  useEffect(() => {
+    if(trefleData){
+        let mappedData = trefleData.map((result, index) => {
+            return ({
+                key: result.slug,
+                text: result.common_name ? result.common_name + " / " + result.scientific_name : result.scientific_name,
+                value: result.slug,
+                image: { avatar: true, src: result.image_url }
+            })
+        });
+        setSelectData(mappedData);
+        console.log(selectData, "<----selectData from useEffect")
+    }
+  }, [trefleData]);
+
+  useEffect(() => {
+    setState({
+        ...state,
+        plant: selectState
+    })
+  }, [selectState])
+
 
   //---------------------------------------- functions- handlers / submit --------------------------------------//
 
+  // Trefle API submit handler
+  const handleTrefleSubmit = (e, tag) => {
+    e.preventDefault()
+    console.log("From App - making API Call - tag - >", tag);
+    setSearchTag(tag);
+    setToggle(!toggle);
+  };
 
+    // Plant Search Results hanlder
+    function handleSelectChange(e, result){
+        setSelectState(result.value)
+        
+        console.log(result, "dropdown Change")
+        }
+
+  // Photo File
   function handleFileInput(e){
     setSelectedFile(e.target.files[0])
   }
 
-  
+  // update values for text fields
   function handleChange(e){
     setState({
       ...state,
@@ -69,6 +118,7 @@ const TREFLE_BASE_URL = `https://trefle.io/api/v1/plants/search?token=nGl9aJhLyH
           isSeed: state.isSeed ? false : true,
           isRootstock: state.isSeed ? false : true
       })
+      setRadioToggle(!radioToggle);
   }
 
   // datepicker handler
@@ -79,18 +129,20 @@ const TREFLE_BASE_URL = `https://trefle.io/api/v1/plants/search?token=nGl9aJhLyH
       })
   }
 
-
-  // Trefle API submit handler
-  const handleTrefleSubmit = (e, tag) => {
-    e.preventDefault()
-    console.log("From App - making API Call - tag - >", tag);
-    setSearchTag(tag);
-    setToggle(!toggle);
-  };
+  function handleToggleChange(){
+      setState({
+          ...state,
+          forSale: !state.forSale
+      })
+  }
+  
 
 
   //main form submit handler
   function handleSubmit(e){
+
+
+
     e.preventDefault()
              
     const formData = new FormData()
@@ -101,7 +153,8 @@ const TREFLE_BASE_URL = `https://trefle.io/api/v1/plants/search?token=nGl9aJhLyH
     formData.append('dateCollected', state.dateCollected)
     formData.append('quantity', state.quantity)
     formData.append('description', state.description)
-    formData.append('plantName', state.plantName)
+    formData.append('plant', state.plant)
+    formData.append('cultivar', state.cultivar)
     props.handleAddPost(formData)
     
   }
@@ -114,24 +167,27 @@ const TREFLE_BASE_URL = `https://trefle.io/api/v1/plants/search?token=nGl9aJhLyH
         
             <Form  autoComplete="off" onSubmit={handleSubmit}>
               <h3>What are you contributing?</h3>
-              <Radio label={state.isSeed ? "Seeds" : "Rootstock"} toggle value="seed" onChange={handleToggle}/>
+              <RadioComponent handleChange={handleToggle} toggle={radioToggle} />
+              
               {state.isSeed ? 
               <p>Collected seeds, or a plant that has set seed and can be harvested</p>
               :
               <p>Mature plant with established roots or runners that can transplanted.</p>
               }
               
-              <Form.Input
-                  className="form-control"
-                  name="plantName"
-                  value={state.plantName}
-                  placeholder="Common name or Scientific name"
-                  onChange={handleChange}
-                  required
-              />
               
               <PlantSearchBar handleSubmit={handleTrefleSubmit} />
+              
+              <PlantSearchResults selectData={selectData} handleChange={handleSelectChange} selectState={selectState}/>
 
+              <Form.Input
+                  className="form-control"
+                  name="cultivar"
+                  value={state.cultivar}
+                  placeholder="Cultivar name if known or if it exists..."
+                  onChange={handleChange}
+                  required
+              /> 
               <Form.Input
                   className="form-control"
                   name="description"
@@ -150,6 +206,21 @@ const TREFLE_BASE_URL = `https://trefle.io/api/v1/plants/search?token=nGl9aJhLyH
               />
               <h3>When was this collected?</h3>
               <SemanticDatepicker value={state.dateCollected} onChange={handleDate} />
+
+              {props.user.isAdmin ? 
+                <Form.Field>
+                    <Radio
+                        label='For Sale'
+                        name='forSale'
+                        value='forSale'
+                        checked={state.forSale}
+                        onClick={handleToggleChange}
+                    />
+                </Form.Field> 
+              : 
+              ""}
+              
+
               <h3>Do you have a photo?</h3>
               <Form.Input
                 className="form-control"
@@ -165,6 +236,7 @@ const TREFLE_BASE_URL = `https://trefle.io/api/v1/plants/search?token=nGl9aJhLyH
                 SUBMIT
               </Button>
             </Form>
+            
           </Segment>
      
    

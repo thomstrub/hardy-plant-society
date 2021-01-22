@@ -2,10 +2,11 @@ const mongoose = require('mongoose');
 
 
 const plantSchema = new mongoose.Schema({
+    commonName: String,
     genus: String,
     species: String,
     cultivar: String,
-    Description: String,
+    description: String,
     photoUrl: String
   })
  
