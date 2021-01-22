@@ -15,20 +15,20 @@ export default function PlantDetailPage({ user, handleLogout }) {
     const [error, setError] = useState('')
 
     const location = useLocation()
-    console.log(location)
+    console.log(location.pathname.substring(1))
 
     async function getShow() {
 
         try {
 
-            const plantDetail = location.pathname.substring(1)
-            // location.pathname returns /jimbo so we need to cut off the / using the js method substring
-            // This gets the username from the url! 
+            // return just the last part of pathname, which should be the id # for the post
+            const plantDetail = location.pathname.substring(10)
+          
             console.log(plantDetail)
             const data = await plantPostService.getOne(plantDetail);
             console.log(data, "<--------- data from getShow")
             setLoading(() => false)
-            setPost(() => [...data.post])
+            setPost(data.post)
         } catch (err) {
             console.log(err)
             setError(err)
