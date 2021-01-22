@@ -27,9 +27,12 @@ function PlantCard({post, isProfile, user, addLike, removeLike}) {
       }
       <Image src={`${post.photoUrl}`} wrapped ui={false} />
       <Card.Content>
-      <Card.Description>
-        {post.description}
-      </Card.Description>
+      <Link to={`/plantswap/post._id`}>
+        <Card.Description>
+            {post.description}
+        </Card.Description>
+      </Link>
+      
       </Card.Content>
       <Card.Content extra textAlign={'right'}>
         <Icon name={'heart'} size='large' />

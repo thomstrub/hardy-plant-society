@@ -8,7 +8,7 @@ export default function Feed({user, posts, handleLogout}){
 
 
 
-      
+    
 
 
 

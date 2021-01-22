@@ -8,7 +8,8 @@ const { getNodeText } = require('@testing-library/react');
 
 module.exports = {
     create,
-    index
+    index,
+    show
 }
 
 async function trefleCall(plant){
@@ -91,4 +92,6 @@ async function index(req, res){
     }
 }
 
-
+async function show(req, res){
+    console.log("hitting the show route");
+}

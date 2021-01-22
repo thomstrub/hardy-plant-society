@@ -1,11 +1,11 @@
 import tokenService from './tokenService';
 
-const BASE_URL = '/api/plantswap'
+const BASE_URL = '/api/plantswap/'
 
 
 
 
-export function create(post){
+function create(post){
     return fetch(BASE_URL, {
         method: 'POST',
         body: post, // our info from the form
@@ -16,7 +16,7 @@ export function create(post){
 
 }
 
-export function getAll() {
+function getAll() {
     return fetch(BASE_URL, {
       headers: {
         'Authorization': 'Bearer ' + tokenService.getToken()
@@ -24,3 +24,21 @@ export function getAll() {
     })
     .then(res => res.json());
   }
+
+function getOne(plantId){
+    return fetch(BASE_URL + plantId, {
+        headers: {
+            'Authorization': 'Bearer ' + tokenService.getToken()
+        }
+    }).then(res => {
+        if(res.ok) return res.json()
+        throw new Error('Plant posting does not exist')
+    })
+}
+
+export default {
+    create,
+    getAll,
+    getOne
+    
+};
