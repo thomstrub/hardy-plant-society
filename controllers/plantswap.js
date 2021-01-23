@@ -35,7 +35,11 @@ async function trefleCall(plant){
                 genus: json.data.main_species.genus,
                 species: json.data.main_species.scientific_name,
                 description: `From the family ${json.data.main_species.family} ${json.data.main_species.family_common_name ? json.data.main_species.family_common_name : '' }. Observed as a native species from ${json.data.main_species.observations}.`,
-                photoUrl: json.data.main_species.image_url
+                photoUrl: json.data.main_species.image_url,
+                flowerImages: json.data.main_species.images.flower,
+                habitImages: json.data.main_species.images.habit,
+                distribution: json.data.main_species.distribution.native,
+                otherCommonNames: json.data.main_species.common_names.en
         }
         console.log(plantData);
         } catch(err){

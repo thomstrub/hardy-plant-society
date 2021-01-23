@@ -35,7 +35,7 @@ function PlantCard({post, isProfile, user, addLike, removeLike}) {
       
       </Card.Content>
       <Card.Content extra textAlign={'right'}>
-        <Icon name={'heart'} size='large' />
+        <Icon name={'leaf'} size='large' />
         
           
       </Card.Content>

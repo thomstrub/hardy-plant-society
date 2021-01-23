@@ -9,8 +9,8 @@ export default function Feed({user}){
 
 
       // Plant Posts are created and set as state
-  const [posts, setPosts] = useState([]);
-  async function getPosts(){
+    const [posts, setPosts] = useState([]);
+    async function getPosts(){
     
     try {
       const data = await plantPostAPI.getAll();
@@ -18,11 +18,11 @@ export default function Feed({user}){
     } catch(err){
       console.log(err, ' this is the error')
     }
-  }  
+    }  
 
-  useEffect(() => {
-    getPosts()
-  }, [])
+    useEffect(() => {
+        getPosts()
+    }, [])
     
 
 

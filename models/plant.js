@@ -7,7 +7,11 @@ const plantSchema = new mongoose.Schema({
     species: String,
     cultivar: String,
     description: String,
-    photoUrl: String
+    photoUrl: String,
+    flowerImages: Array,
+    habitImages: Array,
+    distribution: Array,
+    otherCommonNames: Array
   })
  
 
