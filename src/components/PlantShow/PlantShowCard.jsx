@@ -15,7 +15,7 @@ const PlantShowCard = ({post}) => (
     </Grid.Row>
     <Grid.Row>
       <Grid.Column>
-        <Segment raised>
+        <Segment >
             <PlantDetailsCard post={post}/>
         </Segment>
       </Grid.Column>

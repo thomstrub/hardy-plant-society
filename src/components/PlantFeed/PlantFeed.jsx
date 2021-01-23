@@ -6,7 +6,7 @@ import PlantCard from '../PlantCard/PlantCard';
 export default function PlantFeed({posts, isProfile, numPhotosCol, user}){
 
     return (
-        <Card.Group itemsPerRow={numPhotosCol} stackable>
+        <Card.Group itemsPerRow={3} stackable>
            
                 {posts.map((post) => {
                 return ( 

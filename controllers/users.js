@@ -66,7 +66,6 @@ async function login(req, res) {
 /*----- Helper Functions -----*/
 
 function createJWT(user) {
-  console.log(KEY, "KEY FROM CREATE USER")
   return jwt.sign(
     {user}, // data payload
     SECRET,
