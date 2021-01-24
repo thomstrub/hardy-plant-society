@@ -41,7 +41,7 @@ export default function LoginForm({handleChange, handleSubmit, state, error, inv
               </Segment>
             </Form>
             <Message>
-              New to us? <Link to='/signup'>Sign Up</Link>
+              No account yet? <Link to='/signup'>Sign Up</Link>
             </Message>
             {error ? <ErrorMessage error={error} /> : null}
             </Grid.Column>

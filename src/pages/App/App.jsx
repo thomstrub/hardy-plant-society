@@ -51,15 +51,8 @@ function App() {
           <Route exact path="/">
               <h1>Home Page</h1>
           </Route>
-          <Route exact path="/plantswap/new">
-             <PlantPostCreatePage user={user} handleAddPost={handleAddPost} loading={loading}/>
-          </Route>
-          <Route exact path="/plantswap/">
-             <PlantFeedPage user={user} handleLogout={handleLogout}/>
-          </Route>
-          <Route path="/plantswap/:id">
-             <PlantDetailPage user={user} handleLogout={handleLogout}/>
-          </Route>
+          
+          
           <Route exact path="/login">
              <LoginPage handleSignUpOrLogin={handleSignUpOrLogin}/>
           </Route>
@@ -71,6 +64,15 @@ function App() {
           </Route>
           {userService.getUser() ? 
             <>
+                <Route exact path="/plantswap/">
+                  <PlantFeedPage user={user} handleLogout={handleLogout}/>
+                </Route>
+                <Route exact path="/plantswap/new">
+                  <PlantPostCreatePage user={user} handleAddPost={handleAddPost} loading={loading}/>
+                </Route>
+                <Route path="/plantswap/:id">
+                  <PlantDetailPage user={user} handleLogout={handleLogout}/>
+                </Route>
                 <Route path="/:username">
                   <ProfilePage user={user} handleLogout={handleLogout}/>
                 </Route>

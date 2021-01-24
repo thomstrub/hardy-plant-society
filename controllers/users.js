@@ -70,7 +70,7 @@ async function profile(req, res) {
   try{
     const user = await User.findOne({username: req.params.username})
     console.log(user,"profile controller")
-    const posts = await PlantPost.find({user: user._id}).populate('plant').exec();
+    const posts = await PlantPost.find({user: user._id}).populate('user').populate('plant').exec();
     console.log(posts, "profile posts")
     
     res.status(200).json({posts: posts, user: user})

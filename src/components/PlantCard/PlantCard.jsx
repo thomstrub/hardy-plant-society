@@ -51,7 +51,7 @@ function PlantCard({post, isProfile, user, addLike, removeLike}) {
       
       </Card.Content>
       <Card.Content textAlign="center">
-          {isProfile ? 
+          {post.user._id === user._id ? 
           <Button >Delete</Button>
           :
           <Button >Request</Button>

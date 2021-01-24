@@ -1,6 +1,7 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 import ErrorMessage from '../../../components/ErrorMessage/ErrorMessage';
-import { Button, Form, Grid, Header, Image, Segment } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Image, Segment, Message } from 'semantic-ui-react'
 
 export default function SignupForm({handleChange, handleSubmit, handleFileInput, state, invalidForm, error}){
     return (
@@ -69,6 +70,9 @@ export default function SignupForm({handleChange, handleSubmit, handleFileInput,
                     >
                     Signup
                   </Button>
+                  <Message>
+                    Already have an account? <Link to='/login'>Login</Link>
+                  </Message>
                   </Segment>
                   {error ? <ErrorMessage error={error} /> : null}
                 </Form>

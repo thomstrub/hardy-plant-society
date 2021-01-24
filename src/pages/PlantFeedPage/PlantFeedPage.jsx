@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
 import PlantFeed from '../../components/PlantFeed/PlantFeed';
-
+import PageHeader from '../../components/Header/Header'
 import {  Grid } from 'semantic-ui-react'
 import * as plantPostAPI from '../../utils/plantPostService'
 
-export default function Feed({user}){  
+export default function Feed({user, handleLogout}){  
 
 
       // Plant Posts are created and set as state
@@ -32,7 +32,7 @@ export default function Feed({user}){
       <Grid centered >
         <Grid.Row>
           <Grid.Column>
-            Header
+            <PageHeader user={user} handleLogout={handleLogout}/>
           </Grid.Column>
         </Grid.Row>
         
