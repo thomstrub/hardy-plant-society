@@ -28,7 +28,7 @@ function PlantCard({post, isProfile, user, addLike, removeLike}) {
                   src={post.user.photoUrl ? post.user.photoUrl : 'https://react.semantic-ui.com/images/wireframe/square-image.png'}
               />
               </Card.Header>
-              <Card.Header floated="right">{post.user.username}</Card.Header>
+              <Card.Header floated="right">{post.user.isAdmin ? `${post.user.username} - Admin` : post.user.username}</Card.Header>
           </Card.Content>
         </Link>
       }
@@ -51,7 +51,12 @@ function PlantCard({post, isProfile, user, addLike, removeLike}) {
       
       </Card.Content>
       <Card.Content textAlign="center">
-          <Button >Request This Plant</Button>
+          {isProfile ? 
+          <Button >Delete</Button>
+          :
+          <Button >Request</Button>
+          }
+          
       </Card.Content>
     </Card>
   );
