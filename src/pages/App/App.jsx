@@ -62,24 +62,33 @@ function App() {
           <Route exact path="/admin">
              <AdminSignupPage handleSignUpOrLogin={handleSignUpOrLogin}/>
           </Route>
-          {userService.getUser() ? 
-            <>
-                <Route exact path="/plantswap/">
-                  <PlantFeedPage user={user} handleLogout={handleLogout}/>
-                </Route>
-                <Route exact path="/plantswap/new">
-                  <PlantPostCreatePage user={user} handleAddPost={handleAddPost} loading={loading}/>
-                </Route>
-                <Route path="/plantswap/:id">
+          
+          <Route exact path="/plantswap/">
+              <PlantFeedPage user={user} handleLogout={handleLogout}/>
+          </Route>
+          <Route exact path="/plantswap/new">
+              {userService.getUser()?
+                <PlantPostCreatePage user={user} handleAddPost={handleAddPost} loading={loading}/>
+              :
+                <Redirect to='/login'/>
+              }
+                  
+          </Route>
+          <Route path="/plantswap/:id">
                   <PlantDetailPage user={user} handleLogout={handleLogout}/>
-                </Route>
-                <Route path="/:username">
-                  <ProfilePage user={user} handleLogout={handleLogout}/>
-                </Route>
-            </>
-            :
-            <Redirect to='/login'/>
-          }
+          </Route>
+                
+          <Route path="/:username">
+            
+            {userService.getUser()?
+              <ProfilePage user={user} handleLogout={handleLogout}/>
+              :
+                <Redirect to='/login'/>
+              }
+          </Route>   
+                
+                
+        
          
       </Switch>
     </div>

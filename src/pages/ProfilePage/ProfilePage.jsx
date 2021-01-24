@@ -15,10 +15,10 @@ export default function ProfilePage({ user, handleLogout }) {
     const [error, setError] = useState('')
 
     const location = useLocation()
-    console.log(location)
+    console.log(location, "location")
 
     async function getProfile() {
-
+        
         try {
 
             const username = location.pathname.substring(1)
@@ -40,6 +40,7 @@ export default function ProfilePage({ user, handleLogout }) {
 
 
     useEffect(() => {
+        if (location.pathname.substring(1) !== "plantswap")
         getProfile()
 
     }, [])
