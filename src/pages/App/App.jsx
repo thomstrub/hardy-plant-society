@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
 import * as plantPostAPI from '../../utils/plantPostService'
 import SignupPage from '../SignupPage/SignupPage';
@@ -9,6 +9,7 @@ import AdminSignupPage from '../AdminSignupPage/AdminSignupPage';
 import PlantPostCreatePage from '../PlantPostCreatePage/PlantPostCreatePage';
 import PlantFeedPage from '../PlantFeedPage/PlantFeedPage';
 import PlantDetailPage from '../PlantDetailPage/PlantDetailPage'
+import ProfilePage from '../ProfilePage/ProfilePage'
 
 function App() {
   // getUser decodes the JWT token into a javascript object
@@ -68,6 +69,16 @@ function App() {
           <Route exact path="/admin">
              <AdminSignupPage handleSignUpOrLogin={handleSignUpOrLogin}/>
           </Route>
+          {userService.getUser() ? 
+            <>
+                <Route path="/:username">
+                  <ProfilePage user={user} handleLogout={handleLogout}/>
+                </Route>
+            </>
+            :
+            <Redirect to='/login'/>
+          }
+         
       </Switch>
     </div>
   );

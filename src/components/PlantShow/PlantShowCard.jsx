@@ -1,14 +1,14 @@
 import React from 'react'
 import { Grid, Image, Segment } from 'semantic-ui-react'
 import PlantDetailsCard from './PlantDetailsCard'
-
+import './PlantShow.css'
 const PlantShowCard = ({post}) => (
 
   <Grid columns={1} >
   <Segment raised>
     <Grid.Row>
-      <Grid.Column>
-        <Segment raised>
+      <Grid.Column className="center">
+        <Segment >
             <Image src={post.photoUrl} />
         </Segment>
       </Grid.Column>

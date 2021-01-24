@@ -23,6 +23,7 @@ function PlantCard({post, isProfile, user, addLike, removeLike}) {
               <Image
                   floated='left'
                   size='large'
+                  verticalAlign='middle'
                   avatar
                   src={post.user.photoUrl ? post.user.photoUrl : 'https://react.semantic-ui.com/images/wireframe/square-image.png'}
               />
