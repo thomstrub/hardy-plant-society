@@ -11,7 +11,8 @@ module.exports = {
     create,
     index,
     show,
-    searchTrefle
+    searchTrefle,
+    delete: deletePost
 }
 
 async function trefleCall(plant){
@@ -131,11 +132,12 @@ async function searchTrefle(req,res){
     }
 }
 
-// const trefleUrl = `${TREFLE_BASE_URL}${searchTag.replace(/\s/g, '&')}`;
-//     fetch(proxyurl + trefleUrl)
-//       .then((res) => res.json())
-//       .then((data) => {
-//         console.log(data.data, "json data");
-//         setTrefleData(data.data);
-        
-//       });
+async function deletePost(req, res){
+    try {
+        console.log("hitting delete")
+        const post = await PlantPost.findOneAndDelete({'_id': req.params.id});
+        res.json({data: 'post removed'})
+    } catch(err){
+        res.json({error: err})
+    }
+}

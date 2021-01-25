@@ -9,6 +9,7 @@
     "aws-sdk": "^2.828.0",
     "bcrypt": "^5.0.0",
     "dotenv": "^8.2.0",
+    "emailjs-com": "^2.6.4",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.8",

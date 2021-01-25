@@ -1,5 +1,6 @@
 import React from 'react'
 import { Image, Item, Header } from 'semantic-ui-react'
+import {Link} from 'react-router-dom';
 
 import './AdminPostCard.css'
 
@@ -14,11 +15,11 @@ export default function AdminPostFeed({post, removePost, user}){
           <Item.Image size='small' src={post.photoUrl} />
     
           <Item.Content>
-            <Item.Header >
+            <Item.Header  >
             <div className="space">
                 <span>{post.title}</span>
                 {user.isAdmin ? 
-                    <span style={{color: "darkred"}} onClick={handleClick}>X</span>
+                    <span  style={{color: "darkred"}} onClick={handleClick}>X</span>
                 :
                     ""
                 }

@@ -6,6 +6,7 @@ import PlantFeed from '../../components/PlantFeed/PlantFeed';
 import Header from '../../components/Header/Header'
 import { useLocation } from 'react-router-dom';
 import LoadingMsg from '../../components/LoadingMsg/LoadingMsg'
+import * as plantPostAPI from '../../utils/plantPostService'
 
 export default function ProfilePage({ user, handleLogout }) {
 
@@ -36,7 +37,14 @@ export default function ProfilePage({ user, handleLogout }) {
         }
     }
 
-
+    async function deletePost(postId) {
+        try {
+            const data = await plantPostAPI.removePost(postId);
+            getProfile();
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
 
     useEffect(() => {
@@ -74,7 +82,7 @@ export default function ProfilePage({ user, handleLogout }) {
                     </Grid.Row>
                     <Grid.Row centered>
                         <Grid.Column style={{ maxWidth: 1050 }}>
-                            <PlantFeed isProfile={true} posts={posts} numPhotosCol={3} user={user} />
+                            <PlantFeed isProfile={true} posts={posts} numPhotosCol={3} user={user} deletePost={deletePost}/>
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>

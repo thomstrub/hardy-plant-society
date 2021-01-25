@@ -1,12 +1,22 @@
 import React from 'react';
 import { Card, Icon, Image, Feed, Button, Header } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
+import EmailModal from '../EmailModal/EmailModal'
 
-function PlantCard({post, isProfile, user}) { 
+function PlantCard({post, isProfile, user, deletePost}) { 
 
 
 
-
+  function returnButton(){
+      if(isProfile){
+        return(<Button onClick={() => {deletePost(post._id)}}>Delete</Button>)
+      } else {
+       if(post.user._id === user._id){
+        return ("")
+       } else {return (<EmailModal post={post} user={user}/>)}
+            
+      }
+  }
 
 
   return (
@@ -31,7 +41,7 @@ function PlantCard({post, isProfile, user}) {
                 {post.user.username}
               </Header>
               <Header color="orange" floated="right">
-                {post.user.isAdmin ? "$5" : ""}
+                {post.forSale ? "$5" : ""}
               </Header>
               
               </Card.Header>
@@ -58,11 +68,7 @@ function PlantCard({post, isProfile, user}) {
       
       </Card.Content>
       <Card.Content textAlign="center">
-          {post.user._id === user._id ? 
-          <Button >Delete</Button>
-          :
-          <Button >Request</Button>
-          }
+         {returnButton()}
           
       </Card.Content>
     </Card>
