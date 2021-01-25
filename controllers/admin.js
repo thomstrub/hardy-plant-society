@@ -21,7 +21,7 @@ async function create(req, res){
             
           
             // data.Location is the address where our image is stored on aws
-            const post = await AdminPost.create({title: req.body.title, body: req.body.body, date: req.body.date, photoUrl: data.Location});
+            const post = await AdminPost.create({user: req.user, title: req.body.title, body: req.body.body, date: req.body.date, photoUrl: data.Location});
             const populatedUserPost = await post.populate('user').execPopulate();
             res.status(201).json({post: populatedUserPost})
         })

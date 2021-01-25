@@ -11,6 +11,7 @@ import PlantFeedPage from '../PlantFeedPage/PlantFeedPage';
 import PlantDetailPage from '../PlantDetailPage/PlantDetailPage'
 import ProfilePage from '../ProfilePage/ProfilePage'
 import AdminPostCreatePage from '../AdminPostCreatePage/AdminPostCreatePage'
+import HomePage from '../HomePage/HomePage'
 
 function App() {
   // getUser decodes the JWT token into a javascript object
@@ -50,7 +51,7 @@ function App() {
     <div className="App">
       <Switch>
           <Route exact path="/">
-              <h1>Home Page</h1>
+              <HomePage user={user} />
           </Route>
           
           
