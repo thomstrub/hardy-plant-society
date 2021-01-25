@@ -8,7 +8,7 @@ function PlantCard({post, isProfile, user, deletePost}) {
 
   function returnButton(){
       if(isProfile){
-        return(<Button onClick={deletePost}>Delete</Button>)
+        return(<Button onClick={() => {deletePost(post._id)}}>Delete</Button>)
       } else {
        if(post.user._id === user._id){
         return ("")
@@ -40,7 +40,7 @@ function PlantCard({post, isProfile, user, deletePost}) {
                 {post.user.username}
               </Header>
               <Header color="orange" floated="right">
-                {post.user.isAdmin ? "$5" : ""}
+                {post.forSale ? "$5" : ""}
               </Header>
               
               </Card.Header>
