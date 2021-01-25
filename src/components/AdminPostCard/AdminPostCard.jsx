@@ -1,9 +1,12 @@
 import React from 'react'
-import { Image, Item } from 'semantic-ui-react'
+import { Image, Item, Header } from 'semantic-ui-react'
 
-export default function AdminPostFeed({post}){
+import './AdminPostCard.css'
 
-    
+
+export default function AdminPostFeed({post, removePost, user}){
+
+    const handleClick = () => removePost(post._id);
 
     return(
        
@@ -11,7 +14,20 @@ export default function AdminPostFeed({post}){
           <Item.Image size='small' src={post.photoUrl} />
     
           <Item.Content>
-            <Item.Header as='a'>{post.title}</Item.Header>
+            <Item.Header >
+            <div className="space">
+                <span>{post.title}</span>
+                {user.isAdmin ? 
+                    <span style={{color: "darkred"}} onClick={handleClick}>X</span>
+                :
+                    ""
+                }
+                
+            </div>
+                    
+                
+            
+            </Item.Header>
             <Item.Meta>{post.date}</Item.Meta>
             <Item.Description>
               <p>{post.body}</p>

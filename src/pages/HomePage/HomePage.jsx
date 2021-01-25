@@ -12,6 +12,15 @@ export default function Feed({user, handleLogout}){
     const [posts, setPosts] = useState([]);
 
 
+    async function removePost(postId) {
+        try {
+            const data = await adminPostAPI.removePost(postId);
+            getPosts();
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     async function getPosts(){
     
     try {
@@ -40,7 +49,7 @@ export default function Feed({user, handleLogout}){
         
         <Grid.Row>
         <Grid.Column style={{maxWidth: 1050}}>
-          <AdminPostFeed posts={posts} user={user} />
+          <AdminPostFeed posts={posts} user={user} removePost={removePost}/>
         </Grid.Column>
         </Grid.Row>
       </Grid>

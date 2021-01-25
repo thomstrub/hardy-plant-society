@@ -5,7 +5,8 @@ const s3 = new S3(); // initialize the construcotr
 
 module.exports = {
     create,
-    index
+    index,
+    delete: deletePost
 }
 
 // We have to use AWS and multer again for this
@@ -46,5 +47,15 @@ async function index(req, res){
         res.status(200).json({posts})
     } catch(err){
 
+    }
+}
+
+async function deletePost(req, res){
+    try {
+        console.log("hitting delete")
+        const post = await AdminPost.findOneAndDelete({'_id': req.params.id});
+        res.json({data: 'post removed'})
+    } catch(err){
+        res.json({error: err})
     }
 }
