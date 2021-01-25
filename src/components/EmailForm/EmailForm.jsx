@@ -16,14 +16,14 @@ export default function EmailForm(props) {
 
   function handleSubmit(e) {
 	  e.preventDefault()
-	  const templateId = 'template_id';
+	  const templateId = 'template_uimoece';
 
 	sendFeedback(templateId, {message: state.message, from_name: state.name, reply_to: this.state.email})
   }
 
   async function sendFeedback (templateId, variables) {
 	await window.emailjs.send(
-  	'gmail', templateId,
+  	'service_uqrfsb8', templateId,
   	variables
   	).then(res => {
     	console.log('Email successfully sent!')
