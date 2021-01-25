@@ -1,12 +1,16 @@
 import React, {useState, useEffect} from 'react';
-
-export default function EmailForm(props) {
+import { Button, Header, Modal } from 'semantic-ui-react'
+export default function EmailForm({setOpen, post, user}) {
  
   const [state, setState] = useState({
-    feedback: '',
-    name: '',
-    email: 'email@example.com'
+    message: '',
+	name: post.user.username,
+	sender: user.username,
+	plant: post.plant.species,
+	toEmail: post.user.email,
+	replyEmail: user.email
   })
+
   function handleChange(e){
     setState({
       ...state,
@@ -16,9 +20,12 @@ export default function EmailForm(props) {
 
   function handleSubmit(e) {
 	  e.preventDefault()
+
 	  const templateId = 'template_uimoece';
 
-	sendFeedback(templateId, {message: state.message, from_name: state.name, reply_to: this.state.email})
+	sendFeedback(templateId, {message: state.message, plant: state.plant, to_name: state.name, from_name: state.sender, send_to: state.toEmail ,reply_to: state.replyEmail})
+	// close modal
+	setOpen(false)
   }
 
   async function sendFeedback (templateId, variables) {
@@ -33,23 +40,44 @@ export default function EmailForm(props) {
   }
   
 	return (
-  	<form className="test-mailing">
-    	<h1>Let's see if it works</h1>
-    	<div>
-      	<textarea
-        	id="test-mailing"
-        	name="test-mailing"
-        	onChange={this.handleChange}
-        	placeholder="Post some lorem ipsum here"
-        	required
-        	value={this.state.message}
-        	style={{width: '100%', height: '150px'}}
-      	/>
-    	</div>
-    	<input type="button" value="Submit" className="btn btn--submit" onClick={this.handleSubmit} />
+		<>
+		<Modal.Header>Send an Email</Modal.Header>
+		<Modal.Content>
+		  <Modal.Description>
+			<Header>Let's see if it works</Header>
+			<form className="message">
+    	
+			<div>
+			<textarea
+				id="message"
+				name="message"
+				onChange={handleChange}
+				placeholder="Post some lorem ipsum here"
+				required
+				value={state.message}
+				style={{width: '100%', height: '150px'}}
+			/>
+			</div>
+			
   	</form>
+		  </Modal.Description>
+		</Modal.Content>
+		<Modal.Actions>
+		  <Button color='black' onClick={() => setOpen(false)}>
+			Cancel
+		  </Button>
+		  <Button
+			content="Send Email"
+			labelPosition='right'
+			icon='checkmark'
+			onClick={handleSubmit}
+			positive
+		  />
+		</Modal.Actions>
+	</>
 	)
   
 
 
 }
+

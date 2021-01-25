@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Icon, Image, Feed, Button, Header } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
+import EmailModal from '../EmailModal/EmailModal'
 
 function PlantCard({post, isProfile, user, deletePost}) { 
 
@@ -12,7 +13,7 @@ function PlantCard({post, isProfile, user, deletePost}) {
       } else {
        if(post.user._id === user._id){
         return ("")
-       } else {return (<Button >Request</Button>)}
+       } else {return (<EmailModal post={post} user={user}/>)}
             
       }
   }
