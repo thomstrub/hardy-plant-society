@@ -2,11 +2,20 @@ import React from 'react';
 import { Card, Icon, Image, Feed, Button, Header } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
-function PlantCard({post, isProfile, user}) { 
+function PlantCard({post, isProfile, user, deletePost}) { 
 
 
 
-
+  function returnButton(){
+      if(isProfile){
+        return(<Button onClick={deletePost}>Delete</Button>)
+      } else {
+       if(post.user._id === user._id){
+        return ("")
+       } else {return (<Button >Request</Button>)}
+            
+      }
+  }
 
 
   return (
@@ -58,11 +67,7 @@ function PlantCard({post, isProfile, user}) {
       
       </Card.Content>
       <Card.Content textAlign="center">
-          {post.user._id === user._id ? 
-          <Button >Delete</Button>
-          :
-          <Button >Request</Button>
-          }
+         {returnButton()}
           
       </Card.Content>
     </Card>
