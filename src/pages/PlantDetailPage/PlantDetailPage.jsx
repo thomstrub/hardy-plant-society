@@ -4,7 +4,7 @@ import LoadingMsg from '../../components/LoadingMsg/LoadingMsg'
 import * as plantPostService from '../../utils/plantPostService'
 
 import PlantShowCard from '../../components/PlantShow/PlantShowCard'
-
+import Header from '../../components/Header/Header'
 
 
 import { useLocation } from 'react-router-dom';
@@ -67,7 +67,7 @@ export default function PlantDetailPage({ user, handleLogout }) {
                 <Grid centered>
                     <Grid.Row>
                         <Grid.Column>
-                            Header
+                            <Header user={user} handleLogout={handleLogout}/>
                         </Grid.Column>
                     </Grid.Row>
                     <Grid.Row>

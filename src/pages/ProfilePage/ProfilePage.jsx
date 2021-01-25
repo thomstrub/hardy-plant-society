@@ -3,7 +3,7 @@ import { Grid, Segment, Dimmer, Loader } from 'semantic-ui-react'
 import userService from '../../utils/userService';
 import ProfileSection from '../../components/ProfileSection/ProfileSection';
 import PlantFeed from '../../components/PlantFeed/PlantFeed';
-
+import Header from '../../components/Header/Header'
 import { useLocation } from 'react-router-dom';
 import LoadingMsg from '../../components/LoadingMsg/LoadingMsg'
 
@@ -64,7 +64,7 @@ export default function ProfilePage({ user, handleLogout }) {
                 <Grid>
                     <Grid.Row>
                         <Grid.Column>
-                            Header
+                            <Header user={user} handleLogout={handleLogout}/>
                         </Grid.Column>
                     </Grid.Row>
                     <Grid.Row>
@@ -73,7 +73,7 @@ export default function ProfilePage({ user, handleLogout }) {
                         </Grid.Column>
                     </Grid.Row>
                     <Grid.Row centered>
-                        <Grid.Column style={{ maxWidth: 750 }}>
+                        <Grid.Column style={{ maxWidth: 1050 }}>
                             <PlantFeed isProfile={true} posts={posts} numPhotosCol={3} user={user} />
                         </Grid.Column>
                     </Grid.Row>

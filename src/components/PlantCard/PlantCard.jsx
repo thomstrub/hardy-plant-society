@@ -1,8 +1,8 @@
 import React from 'react';
-import { Card, Icon, Image, Feed, Button } from 'semantic-ui-react'
+import { Card, Icon, Image, Feed, Button, Header } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
-function PlantCard({post, isProfile, user, addLike, removeLike}) { 
+function PlantCard({post, isProfile, user}) { 
 
 
 
@@ -19,16 +19,23 @@ function PlantCard({post, isProfile, user, addLike, removeLike}) {
         <Link to={`/${user.username}`}>
           <Card.Content >
           
-            <Card.Header floated="left">
-              <Image
-                  floated='left'
-                  size='large'
-                  verticalAlign='middle'
-                  avatar
-                  src={post.user.photoUrl ? post.user.photoUrl : 'https://react.semantic-ui.com/images/wireframe/square-image.png'}
-              />
+            <Card.Header >
+              <Header floated="left">
+                <Image
+                    floated='left'
+                    size='large'
+                    verticalAlign='middle'
+                    avatar
+                    src={post.user.photoUrl ? post.user.photoUrl : 'https://react.semantic-ui.com/images/wireframe/square-image.png'}
+                />
+                {post.user.username}
+              </Header>
+              <Header color="orange" floated="right">
+                {post.user.isAdmin ? "$5" : ""}
+              </Header>
+              
               </Card.Header>
-              <Card.Header floated="right">{post.user.isAdmin ? `${post.user.username} - Admin` : post.user.username}</Card.Header>
+              
           </Card.Content>
         </Link>
       }

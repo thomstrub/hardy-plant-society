@@ -68,7 +68,7 @@ function App() {
           </Route>
           <Route exact path="/plantswap/new">
               {userService.getUser()?
-                <PlantPostCreatePage user={user} handleAddPost={handleAddPost} loading={loading}/>
+                <PlantPostCreatePage user={user} handleAddPost={handleAddPost} loading={loading} user={user} handleLogout={handleLogout}/>
               :
                 <Redirect to='/login'/>
               }

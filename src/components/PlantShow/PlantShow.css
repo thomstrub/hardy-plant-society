@@ -2,3 +2,9 @@
     display: flex;
     justify-content: center;
 }
+
+.image-div{
+    padding: 30px auto;
+    margin: 15px auto;
+    max-width: 450px;
+}

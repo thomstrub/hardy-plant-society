@@ -8,16 +8,16 @@ const PlantShowCard = ({post}) => (
   <Segment raised>
     <Grid.Row>
       <Grid.Column className="center">
-        <Segment >
-            <Image src={post.photoUrl} />
-        </Segment>
+        <div className="image-div" >
+            <Image className="image" src={post.photoUrl} />
+        </div>
       </Grid.Column>
     </Grid.Row>
     <Grid.Row>
       <Grid.Column>
-        <Segment >
+        <div className="content-div">
             <PlantDetailsCard post={post}/>
-        </Segment>
+        </div>
       </Grid.Column>
     </Grid.Row>
     </Segment>
