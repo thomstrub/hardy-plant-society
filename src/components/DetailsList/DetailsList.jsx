@@ -1,8 +1,8 @@
 import React from 'react'
 import { List } from 'semantic-ui-react'
 
-const DescriptionList = (props) => (
+const DetailsList = (props) => (
   <List items={props.list} />
 )
 
-export default DescriptionList
+export default DetailsList

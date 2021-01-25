@@ -25,6 +25,8 @@ app.use('/api/users', require('./routes/api/users'));
 
 app.use('/api/plantswap', require('./routes/api/plantswap'))
 
+app.use('/api/admin/posts', require('./routes/api/admin'))
+
 // "catch all" route
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));

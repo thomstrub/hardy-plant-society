@@ -23,7 +23,7 @@ export default function PageHeader({user, handleLogout}){
                         <List.Item className="nav-item">
                             <Header as='h2'>
                                 
-                                <Link className="link" to='/plantswap/new'>Donate a Plant</Link>
+                                <Link className="link" to='/plantswap/new'>{user.isAdmin ? "Post a Plant" : "Donate a Plant"}</Link>
                                 
                             </Header>
                         </List.Item>
@@ -39,7 +39,7 @@ export default function PageHeader({user, handleLogout}){
                         </List.Item>
                         <List.Item className="nav-item">
                             <Header as='h2'>
-                                <Link className="link" to='/logout'>Logout</Link>
+                                <Link className="link" to='/login'onClick={handleLogout}>Logout</Link>
                             </Header>
                         </List.Item>
                         </>

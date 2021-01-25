@@ -10,6 +10,7 @@ import PlantPostCreatePage from '../PlantPostCreatePage/PlantPostCreatePage';
 import PlantFeedPage from '../PlantFeedPage/PlantFeedPage';
 import PlantDetailPage from '../PlantDetailPage/PlantDetailPage'
 import ProfilePage from '../ProfilePage/ProfilePage'
+import AdminPostCreatePage from '../AdminPostCreatePage/AdminPostCreatePage'
 
 function App() {
   // getUser decodes the JWT token into a javascript object
@@ -62,7 +63,14 @@ function App() {
           <Route exact path="/admin">
              <AdminSignupPage handleSignUpOrLogin={handleSignUpOrLogin}/>
           </Route>
-          
+          <Route exact path="/admin/posts/new">
+              {userService.getUser()?
+                <AdminPostCreatePage user={user} handleAddPost={handleAddPost} loading={loading} setLoading={setLoading} user={user} handleLogout={handleLogout}/>
+              :
+                <Redirect to='/login'/>
+              }
+                  
+          </Route>
           <Route exact path="/plantswap/">
               <PlantFeedPage user={user} handleLogout={handleLogout}/>
           </Route>
