@@ -44,19 +44,6 @@ export default function PlantPostForm(props){
   const [selectData, setSelectData] = useState([]);
   const [selectedPlantData, setSelectedPlantData] = useState({})
 //---------------------------------------- useEffect --------------------------------------//
-//   // Trefle Search API Call
-//   useEffect(() => {
-//     console.log(searchTag, "useEffect searchTag");
-//     console.log(KEY, "KEY <--------------")
-//     const trefleUrl = `${TREFLE_BASE_URL}${searchTag.replace(/\s/g, '&')}`;
-//     fetch(proxyurl + trefleUrl)
-//       .then((res) => res.json())
-//       .then((data) => {
-//         console.log(data.data, "json data");
-//         setTrefleData(data.data);
-        
-//       });
-//   }, [searchTag]);
 
    // Back end Trefle search request 
   

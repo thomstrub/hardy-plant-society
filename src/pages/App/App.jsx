@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
 import * as plantPostAPI from '../../utils/plantPostService'
 import SignupPage from '../SignupPage/SignupPage';
@@ -9,6 +9,9 @@ import AdminSignupPage from '../AdminSignupPage/AdminSignupPage';
 import PlantPostCreatePage from '../PlantPostCreatePage/PlantPostCreatePage';
 import PlantFeedPage from '../PlantFeedPage/PlantFeedPage';
 import PlantDetailPage from '../PlantDetailPage/PlantDetailPage'
+import ProfilePage from '../ProfilePage/ProfilePage'
+import AdminPostCreatePage from '../AdminPostCreatePage/AdminPostCreatePage'
+import HomePage from '../HomePage/HomePage'
 
 function App() {
   // getUser decodes the JWT token into a javascript object
@@ -48,17 +51,10 @@ function App() {
     <div className="App">
       <Switch>
           <Route exact path="/">
-              <h1>Home Page</h1>
+              <HomePage user={user} />
           </Route>
-          <Route exact path="/plantswap/new">
-             <PlantPostCreatePage user={user} handleAddPost={handleAddPost} loading={loading}/>
-          </Route>
-          <Route exact path="/plantswap/">
-             <PlantFeedPage user={user} handleLogout={handleLogout}/>
-          </Route>
-          <Route path="/plantswap/:id">
-             <PlantDetailPage user={user} handleLogout={handleLogout}/>
-          </Route>
+          
+          
           <Route exact path="/login">
              <LoginPage handleSignUpOrLogin={handleSignUpOrLogin}/>
           </Route>
@@ -68,6 +64,41 @@ function App() {
           <Route exact path="/admin">
              <AdminSignupPage handleSignUpOrLogin={handleSignUpOrLogin}/>
           </Route>
+          <Route exact path="/admin/posts/new">
+              {userService.getUser()?
+                <AdminPostCreatePage user={user} handleAddPost={handleAddPost} loading={loading} setLoading={setLoading} user={user} handleLogout={handleLogout}/>
+              :
+                <Redirect to='/login'/>
+              }
+                  
+          </Route>
+          <Route exact path="/plantswap/">
+              <PlantFeedPage user={user} handleLogout={handleLogout}/>
+          </Route>
+          <Route exact path="/plantswap/new">
+              {userService.getUser()?
+                <PlantPostCreatePage user={user} handleAddPost={handleAddPost} loading={loading} user={user} handleLogout={handleLogout}/>
+              :
+                <Redirect to='/login'/>
+              }
+                  
+          </Route>
+          <Route path="/plantswap/:id">
+                  <PlantDetailPage user={user} handleLogout={handleLogout}/>
+          </Route>
+                
+          <Route path="/:username">
+            
+            {userService.getUser()?
+              <ProfilePage user={user} handleLogout={handleLogout}/>
+              :
+                <Redirect to='/login'/>
+              }
+          </Route>   
+                
+                
+        
+         
       </Switch>
     </div>
   );

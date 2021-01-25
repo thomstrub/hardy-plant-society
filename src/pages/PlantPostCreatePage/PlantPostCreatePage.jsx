@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import './PlantPostCreatePage.css';
 import PlantPostForm from '../../components/Forms/PlantPostForm/PlantPostForm'
 import LoadingMsg from '../../components/LoadingMsg/LoadingMsg'
-
+import Header from '../../components/Header/Header'
 import {  Grid } from 'semantic-ui-react'
 
 // create PlantPost service folder, add functions
 
-export default function PlantPostPage(props){
+export default function PlantPostPage({handleAddPost, handleLogout, user, loading}){
  
 
 
@@ -16,16 +16,16 @@ export default function PlantPostPage(props){
             <Grid centered >
             <Grid.Row>
             <Grid.Column>
-                Header
+                <Header user={user} handleLogout={handleLogout}/>
             </Grid.Column>
             </Grid.Row>
             <Grid.Row>
             <Grid.Column style={{ maxWidth: 750 }}>
-                {props.loading ?
+                {loading ?
                     <LoadingMsg />
                     :
                     
-                    <PlantPostForm handleAddPost={props.handleAddPost} user={props.user}/>
+                    <PlantPostForm handleAddPost={handleAddPost} user={user}/>
                 }
             </Grid.Column>
             </Grid.Row>
