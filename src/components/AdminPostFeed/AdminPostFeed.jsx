@@ -2,7 +2,7 @@ import React from 'react'
 import { Image, Item } from 'semantic-ui-react'
 import AdminPostCard from '../AdminPostCard/AdminPostCard'
 
-export default function AdminPostFeed({posts}){
+export default function AdminPostFeed({posts, removePost, user}){
 
     
 
@@ -12,7 +12,7 @@ export default function AdminPostFeed({posts}){
         <Item.Group>
             {posts.map((post) => {
                             return ( 
-                                    <AdminPostCard post={post} key={post._id}  />
+                                    <AdminPostCard post={post} key={post._id} removePost={removePost} user={user} />
                                 )
                             })}
       </Item.Group>
