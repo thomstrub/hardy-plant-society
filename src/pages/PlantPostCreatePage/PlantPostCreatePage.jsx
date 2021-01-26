@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import {useHistory} from 'react-router-dom';
 import './PlantPostCreatePage.css';
+import * as plantPostAPI from '../../utils/plantPostService'
 import PlantPostForm from '../../components/Forms/PlantPostForm/PlantPostForm'
 import LoadingMsg from '../../components/LoadingMsg/LoadingMsg'
 import Header from '../../components/Header/Header'
@@ -7,9 +9,25 @@ import {  Grid } from 'semantic-ui-react'
 
 // create PlantPost service folder, add functions
 
-export default function PlantPostPage({handleAddPost, handleLogout, user, loading}){
- 
 
+
+export default function PlantPostPage({ handleLogout, user, loading, setLoading}){
+    
+    const history = useHistory()
+
+    async function handleAddPost(post){
+        setLoading(true);
+        const data = await plantPostAPI.create(post);
+  
+        // to check to make sure this is working
+        console.log(data, ' data')
+        // data is the response from our create function in controllers/posts
+        // update the state
+        setLoading(false);
+        
+        //Redirect to home page
+        history.push('/plantswap')
+    }
 
     return (
         <>

@@ -18,6 +18,8 @@ export default function ProfilePage({ user, handleLogout }) {
     const location = useLocation()
     console.log(location, "location")
 
+    
+
     async function getProfile() {
         
         try {
