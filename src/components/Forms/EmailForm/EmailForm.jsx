@@ -41,10 +41,10 @@ export default function EmailForm({setOpen, post, user}) {
   
 	return (
 		<>
-		<Modal.Header>Send an Email</Modal.Header>
+		<Modal.Header centered>Request this plant</Modal.Header>
 		<Modal.Content>
 		  <Modal.Description>
-			<Header>Let's see if it works</Header>
+			<p><strong>Your Message to Carole</strong></p>
 			<form className="message">
     	
 			<div>
@@ -52,7 +52,7 @@ export default function EmailForm({setOpen, post, user}) {
 				id="message"
 				name="message"
 				onChange={handleChange}
-				placeholder="Post some lorem ipsum here"
+				placeholder="Hi Carole, What's a good time to pick up the plant? Thanks!"
 				required
 				value={state.message}
 				style={{width: '100%', height: '150px'}}
@@ -63,13 +63,13 @@ export default function EmailForm({setOpen, post, user}) {
 		  </Modal.Description>
 		</Modal.Content>
 		<Modal.Actions>
-		  <Button color='black' onClick={() => setOpen(false)}>
+		  <Button color='grey' onClick={() => setOpen(false)}>
 			Cancel
 		  </Button>
 		  <Button
 			content="Send Email"
-			labelPosition='right'
-			icon='checkmark'
+			
+			
 			onClick={handleSubmit}
 			positive
 		  />

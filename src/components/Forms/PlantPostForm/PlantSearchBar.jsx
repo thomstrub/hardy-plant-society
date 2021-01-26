@@ -19,6 +19,7 @@ export default function PlantSearchBar(props) {
 
   return (
     <>
+        <h3> Find your plant to get started</h3>
         <Form.Input
           id="tagInput"
           type="text"

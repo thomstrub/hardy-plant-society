@@ -1,18 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Button, Form, Radio, Segment } from 'semantic-ui-react'
-import SemanticDatepicker from 'react-semantic-ui-datepickers';
+
 import 'react-semantic-ui-datepickers/dist/react-semantic-ui-datepickers.css';
-import PlantSearchBar from './PlantSearchBar'
-import PlantSearchResults from './PlantSearchResults'
-import RadioComponent from './RadioComponent'
+
+
 import * as plantPostAPI from '../../../utils/plantPostService'
+import PlantPostFormPart1 from './PlantPostFormPart1'
+import PlantPostFormPart2 from './PlantPostFormPart2'
 
 export default function PlantPostForm(props){
-
- // Trefle API variables
- const KEY = process.env.KEY
- const TREFLE_BASE_URL = `https://trefle.io/api/v1/species/search?token=nGl9aJhLyHSPDXgy_7THrf3UycmVNDpcU4kvluaWwZQ&q=`
- const proxyurl = "https://cors-anywhere.herokuapp.com/";
 
     //---------------------------------------- state hooks --------------------------------------//
    // Image to be uploaded to AWS 
@@ -27,11 +23,13 @@ export default function PlantPostForm(props){
     description: "",
     photoUrl: "",
     plant: "",
-    cultivar: ""
+    cultivar: "",
+    partOne: true
 
   })
 
   // Plant Search Results state
+  const [selected, setSelected] = useState('');
   const [selectState, setSelectState] = useState('');
 
   // Radio Toggle State
@@ -42,7 +40,9 @@ export default function PlantPostForm(props){
   const [searchTag, setSearchTag] = useState("");
   const [toggle, setToggle] = useState(true);
   const [selectData, setSelectData] = useState([]);
-  const [selectedPlantData, setSelectedPlantData] = useState({})
+  
+
+ 
 //---------------------------------------- useEffect --------------------------------------//
 
    // Back end Trefle search request 
@@ -78,15 +78,37 @@ export default function PlantPostForm(props){
     }
   }, [trefleData]);
 
+
   useEffect(() => {
     setState({
         ...state,
-        plant: selectState
+        plant: selected
     })
-  }, [selectState])
-
+    console.log(selected, "Selected")
+    console.log(state.plant, "state.plant")
+}, [selected])
 
   //---------------------------------------- functions- handlers / submit --------------------------------------//
+  // handler for form part 1
+  function handlePlantPick(e){
+    e.preventDefault()
+    
+    setSelected(e.target.id);
+    console.log("Selected", selected)
+     setState({
+        ...state,
+        plant: e.target.id
+    })   
+    console.log(state.plant, "state.plant")
+}
+  function toggleFormPart(e){
+      e.preventDefault()
+    
+      setState({
+        ...state,
+        partOne: !state.partOne
+      })
+  }
 
   // Trefle API submit handler
   const handleTrefleSubmit = (e, tag) => {
@@ -96,12 +118,6 @@ export default function PlantPostForm(props){
     setToggle(!toggle);
   };
 
-    // Plant Search Results hanlder
-    function handleSelectChange(e, result){
-        setSelectState(result.value)
-        
-        console.log(result, "dropdown Change")
-        }
 
   // Photo File
   function handleFileInput(e){
@@ -134,7 +150,7 @@ export default function PlantPostForm(props){
       })
   }
 
-  function handleToggleChange(){
+  function handleForSaleChange(){
       setState({
           ...state,
           forSale: !state.forSale
@@ -171,75 +187,9 @@ export default function PlantPostForm(props){
         <Segment>
         
             <Form  autoComplete="off" onSubmit={handleSubmit}>
-              <h3>What are you contributing?</h3>
-              <RadioComponent handleChange={handleToggle} toggle={radioToggle} />
-              
-              {state.isSeed ? 
-              <p>Collected seeds, or a plant that has set seed and can be harvested</p>
-              :
-              <p>Mature plant with established roots or runners that can transplanted.</p>
-              }
-              
-              
-              <PlantSearchBar handleSubmit={handleTrefleSubmit} />
-              
-              <PlantSearchResults selectData={selectData} handleChange={handleSelectChange} selectState={selectState}/>
+            <div hidden={!state.partOne}><PlantPostFormPart1 selected={state.plant} handlePlantPick={handlePlantPick} toggleFormPart={toggleFormPart} handleTrefleSubmit={handleTrefleSubmit} selectData={selectData} trefleData={trefleData} /></div>
+            <div hidden={state.partOne}><PlantPostFormPart2 toggleFormPart={toggleFormPart} user={props.user} handleToggle={handleToggle} radioToggle={radioToggle} state={state} handleChange={handleChange} handleDate={handleDate} handleForSaleChange={handleForSaleChange} handleFileInput={handleFileInput}/></div>
 
-              <Form.Input
-                  className="form-control"
-                  name="cultivar"
-                  value={state.cultivar}
-                  placeholder="Cultivar name if known or if it exists..."
-                  onChange={handleChange}
-                  required
-              /> 
-              <Form.Input
-                  className="form-control"
-                  name="description"
-                  value={state.description}
-                  placeholder={state.isSeed ? "Describe your collection of seeds or plant that has set seed" : "Describe your rootstock or runners that are ready to be transplanted"}
-                  onChange={handleChange}
-                  required
-              /> 
-              <h3>How many {state.isSeed ? "packets of seed" : "plants"} do you have?</h3>
-              <Form.Input
-                className="form-control"
-                name="quantity"
-                value={state.quantity}
-                onChange={handleChange}
-                required
-              />
-              <h3>When was this collected?</h3>
-              <SemanticDatepicker value={state.dateCollected} onChange={handleDate} />
-
-              {props.user.isAdmin ? 
-                <Form.Field>
-                    <Radio
-                        label='For Sale'
-                        name='forSale'
-                        value='forSale'
-                        checked={state.forSale}
-                        onClick={handleToggleChange}
-                    />
-                </Form.Field> 
-              : 
-              ""}
-              
-
-              <h3>Do you have a photo?</h3>
-              <Form.Input
-                className="form-control"
-                type="file"
-                name="photo"
-                placeholder="upload image"
-                onChange={handleFileInput}
-              />   
-              <Button
-                type="submit"
-                className="btn"
-              >
-                SUBMIT
-              </Button>
             </Form>
             
           </Segment>
