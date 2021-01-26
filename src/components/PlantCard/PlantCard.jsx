@@ -9,7 +9,7 @@ function PlantCard({post, isProfile, user, deletePost}) {
 
   function returnButton(){
       if(isProfile){
-        return(<Button onClick={() => {deletePost(post._id)}}>Delete</Button>)
+        return(<Button size="small" onClick={() => {deletePost(post._id)}}>Delete</Button>)
       } else {
        if(post.user._id === user._id){
         return ("")
@@ -22,7 +22,12 @@ function PlantCard({post, isProfile, user, deletePost}) {
   return (
     <Card color="green" key={post._id}>
      
-      <Image src={`${post.photoUrl}`} wrapped ui={false} />
+     
+        <img height={270} src={`${post.photoUrl}`}  wrapped ui={false} />
+    
+     
+     
+      
 
       {isProfile ? ''
         :  
@@ -32,6 +37,7 @@ function PlantCard({post, isProfile, user, deletePost}) {
             <Card.Header >
               <Header floated="left">
                 <Image
+                    
                     floated='left'
                     size='large'
                     verticalAlign='middle'
@@ -67,7 +73,7 @@ function PlantCard({post, isProfile, user, deletePost}) {
       
       
       </Card.Content>
-      <Card.Content textAlign="center">
+      <Card.Content  textAlign="center">
          {returnButton()}
           
       </Card.Content>

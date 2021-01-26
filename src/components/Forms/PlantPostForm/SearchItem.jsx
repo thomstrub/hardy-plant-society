@@ -14,7 +14,7 @@ function SearchItem({image, text, value, selected, handlePlantPick}) {
       <Segment id={value} onClick={handlePlantPick} color={selected ? "green" : "grey"} raised={selected}>
       
       
-        <Item.Image size='tiny' src={image} />
+        <Item.Image inline rounded size='tiny' src={image} />
 
         <Item.Content>
         <Item.Header style={selected ? {color:"green"} : {color : "grey"}} >{text}</Item.Header>
