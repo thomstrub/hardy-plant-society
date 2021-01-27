@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
 const SECRET = process.env.SECRET;
+const KEY = process.env.KEY;
 
 module.exports = function(req, res, next) {
-  console.log(req, "req from auth")
   // Check for the token being sent in three different ways
   let token = req.get('Authorization') || req.query.token || req.body.token;
   if (token) {

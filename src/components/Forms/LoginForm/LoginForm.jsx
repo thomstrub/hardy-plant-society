@@ -7,7 +7,7 @@ export default function LoginForm({handleChange, handleSubmit, state, error, inv
         <>
           <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
             <Grid.Column style={{ maxWidth: 450 }}>
-            <Header as='h2' color='teal' textAlign='center'>
+            <Header as='h2' color='green' textAlign='center'>
             <Image src='https://i.imgur.com/16jlIbf.jpeg' circular/> Log-in to your account
             </Header>
             <Form  autoComplete="off"  onSubmit={handleSubmit}>
@@ -30,7 +30,7 @@ export default function LoginForm({handleChange, handleSubmit, state, error, inv
                     required
                   />
                 <Button
-                  color='teal'
+                  color='green'
                   fluid size='large'
                   type="submit"
                   className="btn"
@@ -41,7 +41,7 @@ export default function LoginForm({handleChange, handleSubmit, state, error, inv
               </Segment>
             </Form>
             <Message>
-              New to us? <Link to='/signup'>Sign Up</Link>
+              No account yet? <Link to='/signup'>Sign Up</Link>
             </Message>
             {error ? <ErrorMessage error={error} /> : null}
             </Grid.Column>

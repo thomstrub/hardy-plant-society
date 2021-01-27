@@ -1,0 +1,20 @@
+
+.nav-container{
+    position: relative;
+}
+.nav{
+    display:flex;
+    vertical-align: bottom;
+    bottom: 0;
+    
+   
+    
+   
+}
+
+
+
+.link{
+    
+    color: green;
+}

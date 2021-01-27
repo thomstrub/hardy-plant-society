@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import SignupPage from '../SignupPage/SignupPage'
 
-export default function AdminSignupPage(){
+export default function AdminSignupPage({handleSignUpOrLogin}){
+    const[admin, setAdmin] = useState(true)
     return(
-        <SignupPage />
+        <SignupPage handleSignUpOrLogin={handleSignUpOrLogin} admin={admin}/>
     )
 }

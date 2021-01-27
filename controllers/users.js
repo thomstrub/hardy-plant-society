@@ -1,6 +1,8 @@
 const User = require('../models/user');
+const PlantPost = require('../models/plantPost');
 const jwt = require('jsonwebtoken');
 const SECRET = process.env.SECRET;
+const KEY = process.env.KEY;
 const { v4: uuidv4 } = require('uuid');
 const S3 = require('aws-sdk/clients/s3');
 const s3 = new S3(); // initialize the construcotr
@@ -8,7 +10,8 @@ const s3 = new S3(); // initialize the construcotr
 
 module.exports = {
   signup,
-  login
+  login,
+  profile
 };
 
 function signup(req, res) {
@@ -60,6 +63,21 @@ async function login(req, res) {
   } catch (err) {
     return res.status(401).json(err);
   }
+}
+
+async function profile(req, res) {
+  console.log("hitting profile");
+  try{
+    const user = await User.findOne({username: req.params.username})
+    console.log(user,"profile controller")
+    const posts = await PlantPost.find({user: user._id}).populate('user').populate('plant').exec();
+    console.log(posts, "profile posts")
+    
+    res.status(200).json({posts: posts, user: user})
+  } catch(err){
+    return res.status(401).json(err)
+  }
+  
 }
 
 /*----- Helper Functions -----*/

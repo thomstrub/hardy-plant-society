@@ -1,6 +1,7 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 import ErrorMessage from '../../../components/ErrorMessage/ErrorMessage';
-import { Button, Form, Grid, Header, Image, Segment } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Image, Segment, Message } from 'semantic-ui-react'
 
 export default function SignupForm({handleChange, handleSubmit, handleFileInput, state, invalidForm, error}){
     return (
@@ -8,7 +9,7 @@ export default function SignupForm({handleChange, handleSubmit, handleFileInput,
         <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
           <Grid.Column style={{ maxWidth: 450 }}>
               <Header as='h2' color='green' textAlign='center'>
-                <Image src='https://i.imgur.com/16jlIbf.jpeg' circular/> Sign Up    
+                <Image src='https://i.imgur.com/16jlIbf.jpeg' circular/> {state.isAdmin ? "Admin Sign Up" : "Sign Up"}    
               </Header>            
                 <Form autoComplete="off"  onSubmit={handleSubmit}>
                 <Segment stacked>               
@@ -27,6 +28,16 @@ export default function SignupForm({handleChange, handleSubmit, handleFileInput,
                       onChange={handleChange}
                       required
                     />
+                    {!state.isAdmin ? "" : (
+                        <Form.Input             
+                      name="adminPw"
+                      type="password"
+                      placeholder="admin password"
+                      value={ state.adminPw}
+                      onChange={handleChange}
+                      required
+                    />)
+                    }
                     <Form.Input             
                       name="password"
                       type="password"
@@ -59,6 +70,9 @@ export default function SignupForm({handleChange, handleSubmit, handleFileInput,
                     >
                     Signup
                   </Button>
+                  <Message>
+                    Already have an account? <Link to='/login'>Login</Link>
+                  </Message>
                   </Segment>
                   {error ? <ErrorMessage error={error} /> : null}
                 </Form>
