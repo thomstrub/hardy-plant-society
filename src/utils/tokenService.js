@@ -27,6 +27,7 @@ function setToken(token) {
   }
   
   function removeToken() {
+    console.log("token service remove")
     localStorage.removeItem('token');
   }
   

@@ -24,6 +24,7 @@ function getUser() {
 }
 
 function logout() {
+  console.log("logout from userService")
   tokenService.removeToken();
 }
 

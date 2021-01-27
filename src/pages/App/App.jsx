@@ -27,6 +27,7 @@ function App() {
   }
 
   function handleLogout(){
+    console.log("logout")
     userService.logout();
     setUser({user: null});
   }
@@ -42,7 +43,7 @@ function App() {
     <div className="App">
       <Switch>
           <Route exact path="/">
-              <HomePage user={user} isAdminPost={isAdminPost} setIsAdminPost={setIsAdminPost}/>
+              <HomePage user={user} isAdminPost={isAdminPost} setIsAdminPost={setIsAdminPost} handleLogout={handleLogout}/>
           </Route>
           
           
