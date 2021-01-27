@@ -6,7 +6,7 @@ import 'pure-react-carousel/dist/react-carousel.es.css';
 function returnImages(images){
     const imageElems = images.map((image, idx) => {
         return(
-            <Slide key={idx} index={idx}><img width={240} src={image}/></Slide>
+            <Slide key={idx} index={idx}><img width={240} src={image} alt="flower or habitat photo"/></Slide>
         )
     });
     return(imageElems);
@@ -15,7 +15,8 @@ function returnImages(images){
 export default function Carousel({plant}) {
     
     const [images, setImages] = useState([]);
-    console.log(plant.flowerImages.concat(plant.habitImages), "image array")
+    
+    // API returns images of flower and images of habitat (among others)
     useEffect(() => {
         const flowers = plant.flowerImages.map((flower) =>{
             return(flower.image_url)
@@ -25,7 +26,7 @@ export default function Carousel({plant}) {
         })
         setImages(returnImages(flowers.concat(plantImages)));
     }, [])
-    console.log(images, "images")
+    
     
       return (
         <CarouselProvider

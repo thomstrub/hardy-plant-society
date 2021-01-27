@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { Button, Modal } from 'semantic-ui-react'
+import * as emailAPI from '../../../utils/emailPostService'
 export default function EmailForm({setOpen, post, user}) {
  
   const [state, setState] = useState({
@@ -21,16 +22,20 @@ export default function EmailForm({setOpen, post, user}) {
   function handleSubmit(e) {
 	  e.preventDefault()
 
-	  const templateId = 'template_uimoece';
-
-	sendFeedback(templateId, {message: state.message, plant: state.plant, to_name: state.name, from_name: state.sender, send_to: state.toEmail ,reply_to: state.replyEmail})
+	sendEmail({message: state.message, plant: state.plant, to_name: state.name, from_name: state.sender, send_to: state.toEmail ,reply_to: state.replyEmail})
 	// close modal
 	setOpen(false)
   }
 
-  async function sendFeedback (templateId, variables) {
+
+  // EmailJS API so users can email eachother about their plants
+  async function sendEmail (variables) {
+
+	// auth for email API hidden in .env -- need to request those from the server
+	const credentials = await emailAPI.getEmailAuth()
 	await window.emailjs.send(
-  	'service_uqrfsb8', templateId,
+	// plug in the email and template credentials
+  	credentials.email, credentials.template,
   	variables
   	).then(res => {
     	console.log('Email successfully sent!')
@@ -41,7 +46,7 @@ export default function EmailForm({setOpen, post, user}) {
   
 	return (
 		<>
-		<Modal.Header centered>Request this plant</Modal.Header>
+		<Modal.Header >Request this plant</Modal.Header>
 		<Modal.Content>
 		  <Modal.Description>
 			<p><strong>Your Message to {post.user.username}</strong></p>

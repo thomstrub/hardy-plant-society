@@ -15,19 +15,13 @@ module.exports = {
 };
 
 function signup(req, res) {
-  console.log(req.body, req.file)
-
-  //////////////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////////
 
   // FilePath unique name to be saved to our butckt
   const filePath = `${uuidv4()}/${req.file.originalname}`
   const params = {Bucket: 'travelgo', Key: filePath, Body: req.file.buffer};
-  //your bucket name goes where collectorcat is 
-  //////////////////////////////////////////////////////////////////////////////////
+ 
   s3.upload(params, async function(err, data){
-    console.log(data, 'from aws') // data.Location is our photoUrl that exists on aws
+    // data.Location is our photoUrl that exists on aws
     const user = new User({...req.body, photoUrl: data.Location});
     try {
       await user.save();
@@ -69,9 +63,9 @@ async function profile(req, res) {
   console.log("hitting profile");
   try{
     const user = await User.findOne({username: req.params.username})
-    console.log(user,"profile controller")
+    
     const posts = await PlantPost.find({user: user._id}).populate('user').populate('plant').exec();
-    console.log(posts, "profile posts")
+    
     
     res.status(200).json({posts: posts, user: user})
   } catch(err){

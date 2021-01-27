@@ -16,7 +16,7 @@ module.exports = {
 }
 
 async function trefleCall(plant){
-        // try{
+        
         //     //API Call
         const proxyurl = "https://cors-anywhere.herokuapp.com/";
         const treflePlantUrl = `https://trefle.io/api/v1/plants/${plant}?token=${KEY}`;
@@ -26,10 +26,8 @@ async function trefleCall(plant){
         console.log(plant, "<------- data from controller")
         const response = await fetch(treflePlantUrl);
         const json = await response.json();
-        console.log(json, "json from controller");
-        // let selectedPlantData = json.data.main_species
-        // console.log(selectedPlantData, "json.data.main_species")
-        // selectedPlantData = selectedPlantData.data.main_species
+       
+        
         try{
             plantData={
                 commonName: (json.data.main_species.common_name ? json.data.main_species.common_name: "nothing"),
@@ -55,7 +53,7 @@ async function trefleCall(plant){
 
 // We have to use AWS and multer again for this
 async function create(req, res){
-    console.log(req.file, req.body, 'this is create method', req.user)
+    
     const plantData = await trefleCall(req.body.plant);
     const plant = await Plant.create(plantData);
     try {
@@ -86,7 +84,7 @@ async function create(req, res){
 
 
 async function index(req, res){
-    console.log(KEY, "KEY FROM INDEX")
+    
     try {
         // this populates the user when you find the posts
         // so you'll have access to the users information 
@@ -101,7 +99,7 @@ async function index(req, res){
 }
 
 async function show(req, res){
-    console.log(req, "req <------------- hitting the show route");
+    
     try{
         const post = await PlantPost.findOne({_id: req.params.id}).populate('plant').populate('user').exec()
         res.status(200).json({post})
@@ -118,12 +116,12 @@ async function searchTrefle(req,res){
     const treflePlantUrl = TREFLE_BASE_URL + req.params.searchTag
     const response = await fetch(treflePlantUrl);
     const json = await response.json();
-    console.log(json, "json from controller");
+    
  
     try{
         const response = await fetch(treflePlantUrl);
         const json = await response.json();
-        console.log(json, "json from controller");
+        
         
         res.status(200).json({json})
     } catch(err){
@@ -134,7 +132,6 @@ async function searchTrefle(req,res){
 
 async function deletePost(req, res){
     try {
-        console.log("hitting delete")
         const post = await PlantPost.findOneAndDelete({'_id': req.params.id});
         res.json({data: 'post removed'})
     } catch(err){

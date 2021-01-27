@@ -1,9 +1,5 @@
-/* div.hero{
-    background-image: url("https://i.imgur.com/chbUliQ.png");
-    transparency
-} */
+
 div.hero {
-    /* background: url("https://i.imgur.com/chbUliQ.png"); */
     background: linear-gradient(rgba(255,255,255, 0), rgba(255,255,255,.4)), url("https://images.unsplash.com/photo-1438109382753-8368e7e1e7cf?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80");
     background-repeat: no-repeat;
     background-size: 100%;
@@ -21,18 +17,6 @@ div.hero {
   
   }
   
-  .grid-content{
-    
 
-  }
 
-  /* div.hero::after {
-    content: "";
-    
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: absolute;
-    z-index: -1;   
-  } */
+  

@@ -57,7 +57,7 @@ function App() {
           </Route>
           <Route exact path="/admin/posts/new">
               {userService.getUser()?
-                <AdminPostCreatePage user={user} loading={loading} setLoading={setLoading} user={user} handleLogout={handleLogout}/>
+                <AdminPostCreatePage user={user} loading={loading} setLoading={setLoading} handleLogout={handleLogout}/>
               :
                 <Redirect to='/login'/>
               }
@@ -68,7 +68,7 @@ function App() {
           </Route>
           <Route exact path="/plantswap/new">
               {userService.getUser()?
-                <PlantPostCreatePage user={user} setLoading={setLoading} loading={loading} user={user} handleLogout={handleLogout}/>
+                <PlantPostCreatePage user={user} setLoading={setLoading} loading={loading} handleLogout={handleLogout}/>
               :
                 <Redirect to='/login'/>
               }

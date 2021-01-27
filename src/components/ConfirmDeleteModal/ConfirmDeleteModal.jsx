@@ -7,13 +7,11 @@ function ConfirDeleteModal({post, deletePost, isAdminPost, removePost}) {
   function handleDelete(e){
     e.preventDefault();
 
-    // remove post is coming from the admin posts on the home page
-    // delete post is coming from the plant post feed on the profile page
-    // isAdminPost is true if the delete function is coming from the admin
-    // posts on the home page
     
+    // isAdminPost is true if the delete function is coming from the admin
+    // posts on the home page and not the user plant posts
+
     isAdminPost ? removePost(post._id) : deletePost(post._id)
-    console.log('confirm delete')
     setOpen(false)
     
   }
