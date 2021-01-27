@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Form, Radio } from 'semantic-ui-react'
 
 export default function RadioComponent(props) {

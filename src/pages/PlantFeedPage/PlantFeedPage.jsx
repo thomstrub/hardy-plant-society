@@ -38,7 +38,7 @@ export default function Feed({user, handleLogout}){
         
         <Grid.Row>
         <Grid.Column style={{maxWidth: 1050}}>
-          <PlantFeed posts={posts} isProfile={false} numPhotosCol={1} user={user} />
+          <PlantFeed posts={posts} isProfile={false} user={user} />
         </Grid.Column>
         </Grid.Row>
       </Grid>

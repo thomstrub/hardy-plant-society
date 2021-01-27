@@ -9,7 +9,7 @@ const PlantShowCard = ({post}) => (
     <Grid.Row>
       <Grid.Column className="center">
         <div className="image-div" >
-            <Image className="image" src={post.photoUrl} />
+            <Image rounded bordered className="image" src={post.photoUrl} />
         </div>
       </Grid.Column>
     </Grid.Row>

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import {useHistory} from 'react-router-dom';
 import * as AdminPostAPI from '../../utils/adminPostService'
 import AdminPostForm from '../../components/Forms/AdminPostForm/AdminPostForm'
 import LoadingMsg from '../../components/LoadingMsg/LoadingMsg'
@@ -7,8 +8,10 @@ import {  Grid } from 'semantic-ui-react'
 
 // create PlantPost service folder, add functions
 
-export default function AdminPostCreatePage({handleAddPost, handleLogout, user, loading, setLoading}){
- 
+export default function AdminPostCreatePage({handleLogout, user, loading, setLoading}){
+    
+    const history = useHistory();
+
     async function handleAddPost(post){
         setLoading(true);
         const data = await AdminPostAPI.create(post);
@@ -18,9 +21,9 @@ export default function AdminPostCreatePage({handleAddPost, handleLogout, user, 
         // data is the response from our create function in controllers/posts
         // update the state
         setLoading(false);
-        // setPosts([data.post,  ...posts])
-        // to conifrm this check the devtools for your feed component
         
+        // to conifrm this check the devtools for your feed component
+        history.push('/')
     }
 
     return (

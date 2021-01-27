@@ -1,25 +1,27 @@
 import React from 'react'
-import { Image, Item, Header } from 'semantic-ui-react'
-import {Link} from 'react-router-dom';
+import { Item } from 'semantic-ui-react'
+import ConfirmDeleteModal from '../ConfirmDeleteModal/ConfirmDeleteModal'
 
 import './AdminPostCard.css'
 
 
-export default function AdminPostFeed({post, removePost, user}){
+export default function AdminPostFeed({post, removePost, user, isAdminPost}){
+
+    
 
     const handleClick = () => removePost(post._id);
 
     return(
        
         <Item>
-          <Item.Image size='small' src={post.photoUrl} />
+          <Item.Image rounded size='medium' src={post.photoUrl} />
     
           <Item.Content>
             <Item.Header  >
             <div className="space">
                 <span>{post.title}</span>
                 {user.isAdmin ? 
-                    <span  style={{color: "darkred"}} onClick={handleClick}>X</span>
+                    <ConfirmDeleteModal post={post} removePost={removePost} isAdminPost={isAdminPost} />
                 :
                     ""
                 }

@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Button, Form, Radio, Segment } from 'semantic-ui-react'
+import React, { useState, useEffect } from 'react';
+import { Form, Segment } from 'semantic-ui-react'
 
 import 'react-semantic-ui-datepickers/dist/react-semantic-ui-datepickers.css';
 
@@ -78,7 +78,7 @@ export default function PlantPostForm(props){
     }
   }, [trefleData]);
 
-
+  // useEffect needed to update state due to asynchronous nature of setState
   useEffect(() => {
     setState({
         ...state,

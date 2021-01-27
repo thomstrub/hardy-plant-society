@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Button, Header, Modal } from 'semantic-ui-react'
+import { Button, Modal } from 'semantic-ui-react'
 export default function EmailForm({setOpen, post, user}) {
  
   const [state, setState] = useState({
@@ -44,7 +44,7 @@ export default function EmailForm({setOpen, post, user}) {
 		<Modal.Header centered>Request this plant</Modal.Header>
 		<Modal.Content>
 		  <Modal.Description>
-			<p><strong>Your Message to Carole</strong></p>
+			<p><strong>Your Message to {post.user.username}</strong></p>
 			<form className="message">
     	
 			<div>
@@ -52,7 +52,7 @@ export default function EmailForm({setOpen, post, user}) {
 				id="message"
 				name="message"
 				onChange={handleChange}
-				placeholder="Hi Carole, What's a good time to pick up the plant? Thanks!"
+				placeholder={`Hi ${post.user.username}, This is ${user.username}. When is a good time to pick up the plant? Thanks!`}
 				required
 				value={state.message}
 				style={{width: '100%', height: '150px'}}

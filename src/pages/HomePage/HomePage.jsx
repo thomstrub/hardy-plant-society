@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-
+import HeroSection from '../../components/HeroSection/HeroSection'
 import AdminPostFeed from '../../components/AdminPostFeed/AdminPostFeed';
 import PageHeader from '../../components/Header/Header'
 import {  Grid } from 'semantic-ui-react'
 import * as adminPostAPI from '../../utils/adminPostService'
 
-export default function Feed({user, handleLogout}){  
+export default function Feed({user, handleLogout, setIsAdminPost, isAdminPost}){  
 
 
       
@@ -33,6 +33,7 @@ export default function Feed({user, handleLogout}){
 
     useEffect(() => {
         getPosts()
+        setIsAdminPost(true)
     }, [])
     
 
@@ -46,10 +47,16 @@ export default function Feed({user, handleLogout}){
             <PageHeader user={user} handleLogout={handleLogout}/>
           </Grid.Column>
         </Grid.Row>
+        <Grid.Row>
+        <Grid.Column fluid>
+          <HeroSection />
+        </Grid.Column>
+        </Grid.Row>
+     
         
         <Grid.Row>
         <Grid.Column style={{maxWidth: 1050}}>
-          <AdminPostFeed posts={posts} user={user} removePost={removePost}/>
+          <AdminPostFeed posts={posts} user={user} removePost={removePost} isAdminPost={isAdminPost}/>
         </Grid.Column>
         </Grid.Row>
       </Grid>

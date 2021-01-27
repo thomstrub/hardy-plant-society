@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
-import { Image } from 'semantic-ui-react'
+
 
 function returnImages(images){
     const imageElems = images.map((image, idx) => {
         return(
-            <Slide key={idx} index={idx}><img src={image}/></Slide>
+            <Slide key={idx} index={idx}><img width={240} src={image}/></Slide>
         )
     });
     return(imageElems);

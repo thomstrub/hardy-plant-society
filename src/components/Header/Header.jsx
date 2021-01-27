@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import { Header, Segment, Image, Icon, List, Grid } from 'semantic-ui-react';
+import { Header, Segment, Icon, List, Grid } from 'semantic-ui-react';
 import './Header.css'
 
 export default function PageHeader({user, handleLogout}){
@@ -14,8 +14,13 @@ export default function PageHeader({user, handleLogout}){
                     <Link className="link" to="/"><Icon className="link" name="leaf"></Icon></Link>
                     
                 </Header>
-                <Header  floated="right" className="nav-container" >
-                <List className="nav" horizontal>
+                <Header  as={Link} to="/" floated="left" >
+                
+                <h3 style={{color: "green"}}>Hardy Plant Society Northwest</h3>
+                    
+                </Header>
+                <Header floated="right" className="nav-container" >
+                <List style={{marginBottom: "-20px"}} className="nav" horizontal>
                    
                     
                     {user ?
@@ -23,7 +28,7 @@ export default function PageHeader({user, handleLogout}){
                         {user.isAdmin ?
                         <List.Item className="nav-item">
                             <Header as='h3'>
-                                    <Link style={{color: "orange"}}className="link" to='/admin/posts/new'>New Admin Post</Link>
+                                    <Link style={{color: "green"}}className="link" to='/admin/posts/new'>New Admin Post</Link>
                             </Header>
                         </List.Item>
                         :

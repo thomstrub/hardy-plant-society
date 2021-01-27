@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Form, Segment } from 'semantic-ui-react'
+import { Button, Form } from 'semantic-ui-react'
 import './PlantPostForm.css';
 
 export default function PlantSearchBar(props) {

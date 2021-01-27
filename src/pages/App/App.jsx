@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
-import * as plantPostAPI from '../../utils/plantPostService'
+
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import userService from '../../utils/userService'
@@ -18,6 +18,8 @@ function App() {
   // this corresponds to the JWT payload defined in the server
   // signup or login function-- const token = createJWT(user) -- where user is the document created from mongo
   const [user, setUser] = useState(userService.getUser())
+  const [isAdminPost, setIsAdminPost] = useState(false)
+
 
 // get the user from localstorage and decode the token
   function handleSignUpOrLogin(){
@@ -28,30 +30,19 @@ function App() {
     userService.logout();
     setUser({user: null});
   }
-
   
+   
+
   const [loading, setLoading] = useState(false);
   
-  async function handleAddPost(post){
-      setLoading(true);
-      const data = await plantPostAPI.create(post);
-
-      // to check to make sure this is working
-      console.log(data, ' data')
-      // data is the response from our create function in controllers/posts
-      // update the state
-      setLoading(false);
-      // setPosts([data.post,  ...posts])
-      // to conifrm this check the devtools for your feed component
-      
-  }
+  
 
 
   return (
     <div className="App">
       <Switch>
           <Route exact path="/">
-              <HomePage user={user} />
+              <HomePage user={user} isAdminPost={isAdminPost} setIsAdminPost={setIsAdminPost}/>
           </Route>
           
           
@@ -66,7 +57,7 @@ function App() {
           </Route>
           <Route exact path="/admin/posts/new">
               {userService.getUser()?
-                <AdminPostCreatePage user={user} handleAddPost={handleAddPost} loading={loading} setLoading={setLoading} user={user} handleLogout={handleLogout}/>
+                <AdminPostCreatePage user={user} loading={loading} setLoading={setLoading} user={user} handleLogout={handleLogout}/>
               :
                 <Redirect to='/login'/>
               }
@@ -77,7 +68,7 @@ function App() {
           </Route>
           <Route exact path="/plantswap/new">
               {userService.getUser()?
-                <PlantPostCreatePage user={user} handleAddPost={handleAddPost} loading={loading} user={user} handleLogout={handleLogout}/>
+                <PlantPostCreatePage user={user} setLoading={setLoading} loading={loading} user={user} handleLogout={handleLogout}/>
               :
                 <Redirect to='/login'/>
               }
@@ -90,7 +81,7 @@ function App() {
           <Route path="/:username">
             
             {userService.getUser()?
-              <ProfilePage user={user} handleLogout={handleLogout}/>
+              <ProfilePage user={user} handleLogout={handleLogout} isAdminPost={isAdminPost} setIsAdminPost={setIsAdminPost}/>
               :
                 <Redirect to='/login'/>
               }

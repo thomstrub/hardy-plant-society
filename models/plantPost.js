@@ -11,6 +11,8 @@ const plantPostSchema = new mongoose.Schema({
     dateCollected: Date,
     quantity: Number,
     description: String,
+  }, {
+    timestamps: true
   })
  
 

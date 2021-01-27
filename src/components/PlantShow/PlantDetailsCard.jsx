@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Image, Segment } from 'semantic-ui-react'
+import { Grid, Segment } from 'semantic-ui-react'
 import DetailsList from '../DetailsList/DetailsList'
 import Carousel from '../Carousel/Carousel'
 
