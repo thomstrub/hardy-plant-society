@@ -20,7 +20,7 @@ export default function DropdownExampleSelection(props){
         });
         
         setResults(mappedData);
-        console.log(results, "<----results from useEffect")
+        
     }
   }, [props.trefleData, props.selected]);
   

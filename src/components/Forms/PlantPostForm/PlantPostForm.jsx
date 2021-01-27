@@ -37,9 +37,9 @@ export default function PlantPostForm(props){
 
   // Trefle API data
   const [trefleData, setTrefleData] = useState("");
-  const [searchTag, setSearchTag] = useState("");
+  const [searchTag, setSearchTag] = useState("astilbe");
   const [toggle, setToggle] = useState(true);
-  const [selectData, setSelectData] = useState([]);
+ 
   
 
  
@@ -62,21 +62,6 @@ export default function PlantPostForm(props){
        getTrefleData(searchTag)
    }, [searchTag])
   
-  // creates array for select menu from Trefle Data
-  useEffect(() => {
-    if(trefleData){
-        let mappedData = trefleData.map((result, index) => {
-            return ({
-                key: result.slug,
-                text: result.common_name ? result.common_name + " / " + result.scientific_name : result.scientific_name,
-                value: result.slug,
-                image: { avatar: true, src: result.image_url }
-            })
-        });
-        setSelectData(mappedData);
-        console.log(selectData, "<----selectData from useEffect")
-    }
-  }, [trefleData]);
 
   // useEffect needed to update state due to asynchronous nature of setState
   useEffect(() => {
@@ -84,8 +69,7 @@ export default function PlantPostForm(props){
         ...state,
         plant: selected
     })
-    console.log(selected, "Selected")
-    console.log(state.plant, "state.plant")
+    
 }, [selected])
 
   //---------------------------------------- functions- handlers / submit --------------------------------------//
@@ -99,9 +83,10 @@ export default function PlantPostForm(props){
         ...state,
         plant: e.target.id
     })   
-    console.log(state.plant, "state.plant")
-}
-  function toggleFormPart(e){
+    
+  }
+
+    function toggleFormPart(e){
       e.preventDefault()
     
       setState({
@@ -187,7 +172,7 @@ export default function PlantPostForm(props){
         <Segment>
         
             <Form  autoComplete="off" onSubmit={handleSubmit}>
-            <div hidden={!state.partOne}><PlantPostFormPart1 selected={state.plant} handlePlantPick={handlePlantPick} toggleFormPart={toggleFormPart} handleTrefleSubmit={handleTrefleSubmit} selectData={selectData} trefleData={trefleData} /></div>
+            <div hidden={!state.partOne}><PlantPostFormPart1 selected={state.plant} handlePlantPick={handlePlantPick} toggleFormPart={toggleFormPart} handleTrefleSubmit={handleTrefleSubmit} trefleData={trefleData} /></div>
             <div hidden={state.partOne}><PlantPostFormPart2 toggleFormPart={toggleFormPart} user={props.user} handleToggle={handleToggle} radioToggle={radioToggle} state={state} handleChange={handleChange} handleDate={handleDate} handleForSaleChange={handleForSaleChange} handleFileInput={handleFileInput}/></div>
 
             </Form>

@@ -27,6 +27,8 @@ app.use('/api/users', require('./routes/api/users'));
 app.use('/api/plantswap', require('./routes/api/plantswap'))
 
 app.use('/api/admin/posts', require('./routes/api/admin'))
+// email
+app.use('/api/email', require('./routes/api/email'))
 
 // "catch all" route
 app.get('/*', function(req, res) {

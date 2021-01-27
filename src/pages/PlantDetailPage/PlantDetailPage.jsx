@@ -18,7 +18,7 @@ export default function PlantDetailPage({ user, handleLogout }) {
     const [error, setError] = useState('')
 
     const location = useLocation()
-    console.log(location.pathname.substring(1))
+    
 
     async function getShow() {
 
@@ -27,9 +27,8 @@ export default function PlantDetailPage({ user, handleLogout }) {
             // *HARDCODED* substring(10) returns the pathname after /plantswap specifically.
             const plantDetail = location.pathname.substring(10)
           
-            console.log(plantDetail)
             const data = await plantPostService.getOne(plantDetail);
-            console.log(data, "<--------- data from getShow")
+            
             
             setPost(data.post)
             setLoading(() => false)
