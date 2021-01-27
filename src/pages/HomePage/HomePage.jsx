@@ -56,7 +56,12 @@ export default function Feed({user, handleLogout, setIsAdminPost, isAdminPost}){
         
         <Grid.Row>
         <Grid.Column style={{maxWidth: 1050}}>
-          <AdminPostFeed posts={posts} user={user} removePost={removePost} isAdminPost={isAdminPost}/>
+        {user ?
+            <AdminPostFeed posts={posts} user={user} removePost={removePost} isAdminPost={isAdminPost}/>
+        :
+            ""
+        }
+          
         </Grid.Column>
         </Grid.Row>
       </Grid>
