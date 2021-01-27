@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Segment, Dimmer, Loader } from 'semantic-ui-react'
+import { Grid} from 'semantic-ui-react'
 import userService from '../../utils/userService';
 import ProfileSection from '../../components/ProfileSection/ProfileSection';
 import PlantFeed from '../../components/PlantFeed/PlantFeed';
@@ -8,7 +8,7 @@ import { useLocation } from 'react-router-dom';
 import LoadingMsg from '../../components/LoadingMsg/LoadingMsg'
 import * as plantPostAPI from '../../utils/plantPostService'
 
-export default function ProfilePage({ user, handleLogout }) {
+export default function ProfilePage({ user, handleLogout, setIsAdminPost, isAdminPost }) {
 
     const [posts, setPosts] = useState([])
     const [profileUser, setProfileUser] = useState({})
@@ -53,6 +53,8 @@ export default function ProfilePage({ user, handleLogout }) {
         if (location.pathname.substring(1) !== "plantswap")
         getProfile()
 
+        // triggers the correct delete function in the delete confirmation modal
+        setIsAdminPost(false)
     }, [])
 
 
@@ -84,7 +86,7 @@ export default function ProfilePage({ user, handleLogout }) {
                     </Grid.Row>
                     <Grid.Row centered>
                         <Grid.Column style={{ maxWidth: 1050 }}>
-                            <PlantFeed isProfile={true} posts={posts} numPhotosCol={3} user={user} deletePost={deletePost}/>
+                            <PlantFeed isProfile={true} posts={posts} isAdminPost={isAdminPost} user={user} deletePost={deletePost} />
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>

@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import { Image, Item, Segment } from 'semantic-ui-react'
+import React from 'react'
+import { Item, Segment } from 'semantic-ui-react'
 
 function SearchItem({image, text, value, selected, handlePlantPick}) {
 

@@ -1,15 +1,18 @@
 import React from 'react';
-import { Card, Icon, Image, Feed, Button, Header } from 'semantic-ui-react'
+import { Card, Image, Header } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 import EmailModal from '../EmailModal/EmailModal'
+import ConfirDeleteModal from '../ConfirmDeleteModal/ConfirmDeleteModal'
 
-function PlantCard({post, isProfile, user, deletePost}) { 
+function PlantCard({post, isProfile, user, deletePost, isAdminPost}) { 
 
 
 
   function returnButton(){
       if(isProfile){
-        return(<Button size="small" onClick={() => {deletePost(post._id)}}>Delete</Button>)
+        return(
+        <ConfirDeleteModal deletePost={deletePost} post={post} isAdminPost={isAdminPost}/>
+        )
       } else {
        if(post.user._id === user._id){
         return ("")
@@ -23,57 +26,61 @@ function PlantCard({post, isProfile, user, deletePost}) {
     <Card color="green" key={post._id}>
      
      
-        <img height={270} src={`${post.photoUrl}`}  wrapped ui={false} />
+        <Image src={`${post.photoUrl}`} alt={post.plant.species} wrapped ui={false}/>
     
-     
      
       
 
       {isProfile ? ''
         :  
         <Link to={`/${user.username}`}>
-          <Card.Content >
+          <Card.Content>
           
-            <Card.Header >
-              <Header floated="left">
+            
+              <Header  floated="left" style={{marginLeft: "10px", marginTop: "10px"}}>
                 <Image
-                    
-                    floated='left'
                     size='large'
-                    verticalAlign='middle'
                     avatar
                     src={post.user.photoUrl ? post.user.photoUrl : 'https://react.semantic-ui.com/images/wireframe/square-image.png'}
                 />
                 {post.user.username}
               </Header>
-              <Header color="orange" floated="right">
+              <Header  color="orange" floated="right" style={{ marginTop: "15px"}}>
                 {post.forSale ? "$5" : ""}
               </Header>
               
-              </Card.Header>
+              
+              
+              
               
           </Card.Content>
         </Link>
       }
-      <Card.Content extra textAlign={'left'}>
-      
-      <Card.Header as={Link} to={`/plantswap/${post._id}`}>
-      
-        {post.plant.species} <br/>
-        "{post.plant.commonName}"
-      
-        </Card.Header>
-         
-      
-      
-      
-        <Card.Description>
-           <p>{post.description}</p> 
-        </Card.Description>
-      
-      
-      </Card.Content>
-      <Card.Content  textAlign="center">
+        <Card.Content style={{ minWidth: "105%"}} >
+        
+            <Card.Header as={Link} to={`/plantswap/${post._id}`}>
+        
+            {post.plant.species} <br/>
+            "{post.plant.commonName}"
+        
+            </Card.Header>
+            <Card.Meta>
+                {post.isSeed?
+                <p>Available as seed</p>
+                :
+                <p>Available as rootstock</p>
+                }
+            </Card.Meta>
+        
+        
+        
+            <Card.Description>
+            <p>{post.description}</p> 
+            </Card.Description>
+        
+        
+        </Card.Content>
+      <Card.Content  extra >
          {returnButton()}
           
       </Card.Content>

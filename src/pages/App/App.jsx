@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
 
@@ -18,6 +18,8 @@ function App() {
   // this corresponds to the JWT payload defined in the server
   // signup or login function-- const token = createJWT(user) -- where user is the document created from mongo
   const [user, setUser] = useState(userService.getUser())
+  const [isAdminPost, setIsAdminPost] = useState(false)
+
 
 // get the user from localstorage and decode the token
   function handleSignUpOrLogin(){
@@ -40,7 +42,7 @@ function App() {
     <div className="App">
       <Switch>
           <Route exact path="/">
-              <HomePage user={user} />
+              <HomePage user={user} isAdminPost={isAdminPost} setIsAdminPost={setIsAdminPost}/>
           </Route>
           
           
@@ -79,7 +81,7 @@ function App() {
           <Route path="/:username">
             
             {userService.getUser()?
-              <ProfilePage user={user} handleLogout={handleLogout}/>
+              <ProfilePage user={user} handleLogout={handleLogout} isAdminPost={isAdminPost} setIsAdminPost={setIsAdminPost}/>
               :
                 <Redirect to='/login'/>
               }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Image } from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
 import LoadingMsg from '../../components/LoadingMsg/LoadingMsg'
 import * as plantPostService from '../../utils/plantPostService'
 
@@ -8,7 +8,7 @@ import Header from '../../components/Header/Header'
 
 
 import { useLocation } from 'react-router-dom';
-import PlantDetailsCard from '../../components/PlantShow/PlantDetailsCard';
+
 
 export default function PlantDetailPage({ user, handleLogout }) {
 

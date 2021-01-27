@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {useHistory} from 'react-router-dom';
 import * as AdminPostAPI from '../../utils/adminPostService'
 import AdminPostForm from '../../components/Forms/AdminPostForm/AdminPostForm'

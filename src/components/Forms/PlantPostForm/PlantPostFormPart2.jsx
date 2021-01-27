@@ -1,7 +1,7 @@
 import React from 'react'
 import RadioComponent from './RadioComponent'
 import SemanticDatepicker from 'react-semantic-ui-datepickers';
-import { Button, Checkbox, Form, Radio} from 'semantic-ui-react'
+import { Button, Checkbox, Form} from 'semantic-ui-react'
 
  export default function PlantPostFormPart2({toggleFormPart, user, handleToggle, radioToggle, state, handleChange, handleDate, handleForSaleChange, handleFileInput}){
      return(

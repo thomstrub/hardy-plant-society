@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { Dropdown, Item } from 'semantic-ui-react'
+import { Item } from 'semantic-ui-react'
 import SearchItem from './SearchItem'
 
 
