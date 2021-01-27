@@ -9,8 +9,6 @@ export default function AdminPostFeed({post, removePost, user, isAdminPost}){
 
     
 
-    const handleClick = () => removePost(post._id);
-
     return(
        
         <Item>

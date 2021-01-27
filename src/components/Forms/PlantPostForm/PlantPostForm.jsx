@@ -95,8 +95,8 @@ export default function PlantPostForm(props){
       })
   }
 
-  // Trefle API submit handler
-  const handleTrefleSubmit = (e, tag) => {
+  // Trefle API submit handler to search for plant
+  function handleTrefleSubmit(e, tag) {
     e.preventDefault()
     console.log("From App - making API Call - tag - >", tag);
     setSearchTag(tag.replace(/\s/g, '&'));

@@ -48,7 +48,7 @@ export default function Feed({user, handleLogout, setIsAdminPost, isAdminPost}){
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
-        <Grid.Column fluid>
+        <Grid.Column >
           <HeroSection />
         </Grid.Column>
         </Grid.Row>

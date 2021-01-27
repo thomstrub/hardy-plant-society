@@ -6,7 +6,7 @@ import 'pure-react-carousel/dist/react-carousel.es.css';
 function returnImages(images){
     const imageElems = images.map((image, idx) => {
         return(
-            <Slide key={idx} index={idx}><img width={240} src={image}/></Slide>
+            <Slide key={idx} index={idx}><img width={240} src={image} alt="flower or habitat photo"/></Slide>
         )
     });
     return(imageElems);
