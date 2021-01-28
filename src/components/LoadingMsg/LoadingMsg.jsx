@@ -8,8 +8,6 @@ const Loading = () => (
       <Dimmer active inverted>
         <Loader inverted>Loading</Loader>
       </Dimmer>
-
-      
     </Segment>
   </div>
 )

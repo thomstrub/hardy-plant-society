@@ -28,6 +28,13 @@ export default function SignUpPage(props){
     })
   }
 
+  function defaultPhoto(){
+    return({
+      ...state,
+      photoUrl: "https://www.avasflowers.net/blog/wp-content/uploads/2019/03/Aprils-Birthflower-The-Dainty-Daisy-1-1.jpg"
+    })
+  }
+
   async function handleSubmit(e){
     
     e.preventDefault();
@@ -68,10 +75,22 @@ export default function SignUpPage(props){
       }
         
       } else {
-        console.log("no file")
-        setError("Please Upload a Photo.")
-        history.push('/')
-        return
+        try {
+          //add a default image for the user
+          let user= defaultPhoto();
+          // refere to the utils/userService, to look at the signup fetch function
+          await userService.signupNoPhoto(user);
+          // setTheUser in our app
+          props.handleSignUpOrLogin() 
+          setLoading(false);
+          history.push('/') 
+  
+        } catch(err){
+          console.log(err.message)
+          setError(err.message)
+        }
+        
+        
       }
       
     }

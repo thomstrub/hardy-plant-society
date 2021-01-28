@@ -6,14 +6,16 @@ const KEY = process.env.KEY;
 const { v4: uuidv4 } = require('uuid');
 const S3 = require('aws-sdk/clients/s3');
 const s3 = new S3(); // initialize the construcotr
-// now s3 can crud on our s3 buckets
+
 
 module.exports = {
   signup,
+  signupNoPhoto,
   login,
   profile
 };
 
+// signup for users who upload a photo
 function signup(req, res) {
 
   // FilePath unique name to be saved to our butckt
@@ -25,28 +27,37 @@ function signup(req, res) {
     const user = new User({...req.body, photoUrl: data.Location});
     try {
       await user.save();
-      const token = createJWT(user); // user is the payload so this is the object in our jwt
+      const token = createJWT(user); 
       res.json({ token });
     } catch (err) {
       // Probably a duplicate email
       res.status(400).json(err);
     }
-
-
-
   })
-  //////////////////////////////////////////////////////////////////////////////////
  
 }
 
+async function signupNoPhoto(req, res){
+  
+  const user = new User({...req.body});
+
+    try {
+      await user.save();
+      const token = createJWT(user); 
+      res.json({ token });
+    } catch (err) {
+      // Probably a duplicate email
+      res.status(400).json(err);
+    }
+}
+
 async function login(req, res) {
-  console.log(req.body)
+  
   try {
     const user = await User.findOne({email: req.body.email});
     console.log(user, ' this user', !user, !!user)
     if (!user) return res.status(401).json({err: 'bad credentials'});
     user.comparePassword(req.body.password, (err, isMatch) => {
-      
       if (isMatch) {
         const token = createJWT(user);
         res.json({token});
@@ -63,10 +74,7 @@ async function profile(req, res) {
   console.log("hitting profile");
   try{
     const user = await User.findOne({username: req.params.username})
-    
     const posts = await PlantPost.find({user: user._id}).populate('user').populate('plant').exec();
-    
-    
     res.status(200).json({posts: posts, user: user})
   } catch(err){
     return res.status(401).json(err)
