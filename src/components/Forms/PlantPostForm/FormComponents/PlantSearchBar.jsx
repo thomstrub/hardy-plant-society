@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Form } from 'semantic-ui-react'
-import './PlantPostForm.css';
+import '../PlantPostForm.css';
 
 export default function PlantSearchBar(props) {
   const [searchTag, setSearchTag] = useState("");

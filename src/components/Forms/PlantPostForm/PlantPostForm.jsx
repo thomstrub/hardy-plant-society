@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Form, Segment } from 'semantic-ui-react'
 
 import 'react-semantic-ui-datepickers/dist/react-semantic-ui-datepickers.css';
-
-
 import * as plantPostAPI from '../../../utils/plantPostService'
 import PlantPostFormPart1 from './PlantPostFormPart1'
 import PlantPostFormPart2 from './PlantPostFormPart2'
@@ -30,7 +28,6 @@ export default function PlantPostForm(props){
 
   // Plant Search Results state
   const [selected, setSelected] = useState('');
-  const [selectState, setSelectState] = useState('');
 
   // Radio Toggle State
   const [radioToggle, setRadioToggle] = useState(true);
@@ -40,10 +37,7 @@ export default function PlantPostForm(props){
   const [searchTag, setSearchTag] = useState("astilbe");
   const [toggle, setToggle] = useState(true);
  
-  
 
- 
-//---------------------------------------- useEffect --------------------------------------//
 
    // Back end Trefle search request 
   
@@ -57,7 +51,7 @@ export default function PlantPostForm(props){
      console.log(err, ' this is the error')
    }
    }  
-
+//---------------------------------------- useEffect --------------------------------------//
    useEffect(() => {
        getTrefleData(searchTag)
    }, [searchTag])

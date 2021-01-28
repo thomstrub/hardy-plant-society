@@ -29,17 +29,20 @@ export default function SignUpPage(props){
   }
 
   async function handleSubmit(e){
-    // add this later
+    
     e.preventDefault();
     setLoading(true);
+
+    // admin signup credentials
     if(props.admin && state.adminPw !== "felco2"){
       setError("Wrong credentials")
       console.log(error)
     } else{
     // Photos have to be sent over as FormData
     // They send over the form in multiparts (multipe requests to the server)
-
-      const formData = new FormData();
+      if(selectedFile){
+        console.log("selected File")
+        const formData = new FormData();
       formData.append('photo', selectedFile);
 
 
@@ -47,14 +50,7 @@ export default function SignUpPage(props){
       for (let key in state){
         formData.append(key, state[key])
       }
-      //fyi if you log out formData you won't see anything you have to use the folllowing
-
-      // Display the key/value pairs
-      // for (var pair of formData.entries()) {
-      //   console.log(pair[0]+ ', ' + pair[1]); 
-      // }
-
-      // SO now we have are data prepared to send over in our formData object
+      
       try {
         // refere to the utils/userService, to look at the signup fetch function
         await userService.signup(formData);
@@ -70,6 +66,14 @@ export default function SignUpPage(props){
         console.log(err.message)
         setError(err.message)
       }
+        
+      } else {
+        console.log("no file")
+        setError("Please Upload a Photo.")
+        history.push('/')
+        return
+      }
+      
     }
   }
 

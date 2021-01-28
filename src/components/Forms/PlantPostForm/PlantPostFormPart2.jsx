@@ -1,5 +1,5 @@
 import React from 'react'
-import RadioComponent from './RadioComponent'
+import RadioComponent from './FormComponents/RadioComponent'
 import SemanticDatepicker from 'react-semantic-ui-datepickers';
 import { Button, Checkbox, Form} from 'semantic-ui-react'
 

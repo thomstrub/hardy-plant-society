@@ -1,6 +1,6 @@
 import React from 'react'
-import PlantSearchBar from './PlantSearchBar'
-import PlantSearchResults from './PlantSearchResults'
+import PlantSearchBar from './FormComponents/PlantSearchBar'
+import PlantSearchResults from './FormComponents/PlantSearchResults'
 import { Button} from 'semantic-ui-react'
 
  export default function PlantPostFormPart1({selected, handlePlantPick, trefleData, toggleFormPart, handleTrefleSubmit}){

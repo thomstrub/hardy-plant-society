@@ -9,7 +9,7 @@ function PlantCard({post, isProfile, user, deletePost, isAdminPost}) {
 
 
   function returnButton(){
-      if(isProfile){
+      if(isProfile && user._id === post.user._id){
         return(
         <ConfirDeleteModal deletePost={deletePost} post={post} isAdminPost={isAdminPost}/>
         )
@@ -33,7 +33,7 @@ function PlantCard({post, isProfile, user, deletePost, isAdminPost}) {
 
       {isProfile ? ''
         :  
-        <Link to={`/${user.username}`}>
+        <Link to={`/${post.user.username}`}>
           <Card.Content>
           
             
