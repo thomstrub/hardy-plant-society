@@ -7,7 +7,6 @@ import './AdminPostCard.css'
 
 export default function AdminPostFeed({post, removePost, user, isAdminPost}){
 
-    
 
     return(
        
@@ -25,8 +24,6 @@ export default function AdminPostFeed({post, removePost, user, isAdminPost}){
                 }
                 
             </div>
-                    
-                
             
             </Item.Header>
             <Item.Meta>{post.date}</Item.Meta>

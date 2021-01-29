@@ -35,9 +35,7 @@ export default function Feed({user, handleLogout, setIsAdminPost, isAdminPost}){
         getPosts()
         setIsAdminPost(true)
     }, [])
-    
-
-
+  
 
     return (
         

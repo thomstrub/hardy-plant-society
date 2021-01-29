@@ -25,8 +25,6 @@ export default function Feed({user, handleLogout}){
     }, [])
     
 
-
-
     return (
         
       <Grid centered >

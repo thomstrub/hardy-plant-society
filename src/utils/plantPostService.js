@@ -23,19 +23,6 @@ export function getAll() {
     .then(res => res.json());
   }
 
-// export function getOne(plantId){
-//     console.log(BASE_URL + plantId, "utils<---------------------------");
-//     return fetch(BASE_URL + plantId, {
-//         headers: {
-//             'Authorization': 'Bearer ' + tokenService.getToken()
-//         }
-//     }).then(res => {
-//         console.log("second part of getOne")
-//         if(res.ok) return res.json()
-//         throw new Error('Plant posting does not exist')
-//     })
-// }
-
 export function getOne(plantId) {
     return fetch(BASE_URL + plantId, {
       headers: {
