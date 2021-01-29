@@ -3,16 +3,10 @@ import { Item, Segment } from 'semantic-ui-react'
 
 function SearchItem({image, text, value, selected, handlePlantPick}) {
 
-    
-
-    
-
-   
 
     return(
       
       <Segment id={value} onClick={handlePlantPick} color={selected ? "green" : "grey"} raised={selected}>
-      
       
         <Item.Image inline rounded size='tiny' src={image} />
 

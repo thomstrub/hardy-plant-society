@@ -6,8 +6,6 @@ import ConfirDeleteModal from '../ConfirmDeleteModal/ConfirmDeleteModal'
 
 function PlantCard({post, isProfile, user, deletePost, isAdminPost}) { 
 
-
-
   function returnButton(){
       if(isProfile && user._id === post.user._id){
         return(
@@ -21,15 +19,11 @@ function PlantCard({post, isProfile, user, deletePost, isAdminPost}) {
       }
   }
 
-
   return (
     <Card color="green" key={post._id}>
      
-     
         <Image src={`${post.photoUrl}`} alt={post.plant.species} wrapped ui={false}/>
-    
-     
-      
+
 
       {isProfile ? ''
         :  
@@ -48,11 +42,7 @@ function PlantCard({post, isProfile, user, deletePost, isAdminPost}) {
               <Header  color="orange" floated="right" style={{ marginTop: "15px"}}>
                 {post.forSale ? "$5" : ""}
               </Header>
-              
-              
-              
-              
-              
+           
           </Card.Content>
         </Link>
       }
@@ -71,13 +61,9 @@ function PlantCard({post, isProfile, user, deletePost, isAdminPost}) {
                 <p>Available as rootstock</p>
                 }
             </Card.Meta>
-        
-        
-        
             <Card.Description>
             <p>{post.description}</p> 
             </Card.Description>
-        
         
         </Card.Content>
       <Card.Content  extra >

@@ -21,8 +21,7 @@ export default function PlantPostPage({ handleLogout, user, loading, setLoading}
   
         // to check to make sure this is working
         console.log(data, ' data')
-        // data is the response from our create function in controllers/posts
-        // update the state
+        
         setLoading(false);
         
         //Redirect to home page
