@@ -10,7 +10,7 @@ export default function LoginForm({handleChange, handleSubmit, state, error, inv
           <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
             <Grid.Column style={{ maxWidth: 450 }}>
             <Header as='h2' color='green' textAlign='center'>
-            <Image style={{maxHeight: "4.5vw"}} src='https://i.imgur.com/16jlIbf.jpeg' circular/> Log-in to your account
+            <Image style={{maxHeight: "5vw", maxWidth: "5vw"}} src='https://i.imgur.com/16jlIbf.jpeg' circular/> Log-in to your account
             </Header>
             <Form  autoComplete="off"  onSubmit={handleSubmit}>
                <Segment stacked>
