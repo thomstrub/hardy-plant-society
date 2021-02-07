@@ -9,8 +9,8 @@ export default function SignupForm({handleChange, handleSubmit, handleFileInput,
         <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
           <Grid.Column style={{ maxWidth: 450 }}>
               <Header as='h2' color='green' textAlign='center'>
-                <Image style={{maxHeight: "5vw", maxWidth: "5vw"}} src='https://i.imgur.com/16jlIbf.jpeg' circular/> 
-                <div style={{margin: "1.5vw 0 0 1vw"}}>{state.isAdmin ? "Admin Sign Up" : "Sign Up"}</div>
+                <Image style={{maxHeight: "60px", maxWidth: "60px"}} src='https://i.imgur.com/16jlIbf.jpeg' circular/> 
+                <div style={{margin: "15px 0 0 15px"}}>{state.isAdmin ? "Admin Sign Up" : "Sign Up"}</div>
               </Header>            
                 <Form autoComplete="off"  onSubmit={handleSubmit}>
                 <Segment stacked>               
