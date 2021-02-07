@@ -38,15 +38,10 @@ export default function PlantDetailPage({ user, handleLogout }) {
         }
     }
 
-
-    
-
-
     useEffect(() => {
         getShow()
 
     }, [])
-
 
 
     return (

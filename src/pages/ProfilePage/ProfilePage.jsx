@@ -20,11 +20,8 @@ export default function ProfilePage({ user, handleLogout, setIsAdminPost, isAdmi
     async function getProfile() {
         
         try {
-
             const username = location.pathname.substring(1) 
-            
             const data = await userService.getProfile(username);
-            
             setLoading(() => false)
             setPosts(() => [...data.posts])
             setProfileUser(() => data.user)

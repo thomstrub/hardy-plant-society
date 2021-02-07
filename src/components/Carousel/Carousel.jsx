@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 
-
 function returnImages(images){
     const imageElems = images.map((image, idx) => {
         return(
