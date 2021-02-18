@@ -39,7 +39,7 @@ export default function PageHeader({user, handleLogout}){
                         }
                         <List.Item className="nav-item">
                             <Header as='h3'>
-                                
+                                {path === "plantswap/new" ? console.log("success") : console.log("failure")}
                                 <Link className="link" to='/plantswap/new'>{user.isAdmin ? "Post a Plant" : "Donate a Plant"}</Link>
                                 
                             </Header>
