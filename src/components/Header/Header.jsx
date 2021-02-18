@@ -8,7 +8,7 @@ export default function PageHeader({user, handleLogout}){
     const path = history.location.pathname.slice(1)
     console.log(path, "path")
     return (
-        <Segment clearing>
+        <Segment clearing style={{marginBottom: "30px"}}>
         <Grid centered>
         <Grid.Row>
             <Grid.Column style={{ maxWidth: 1150, marginTop: "20px"}}>
