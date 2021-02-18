@@ -47,7 +47,7 @@ export default function PageHeader({user, handleLogout}){
                             <Header as='h3'>
                                 
                                 <Link 
-                                    style={path === "plantswap/new" ? {color: "orange"} : {}} 
+                                    style={path === "plantswap/new" ? {color: "#9eb334"} : {}} 
                                     className="link" 
                                     to='/plantswap/new'
                                 >
@@ -60,7 +60,7 @@ export default function PageHeader({user, handleLogout}){
                         <List.Item className="nav-item">
                             <Header as='h3'>
                                 <Link 
-                                    style={path === "plantswap" ? {color: "orange"} : {}} 
+                                    style={path === "plantswap" ? {color: "#9eb334"} : {}} 
                                     className="link" 
                                     to='/plantswap'
                                 >
@@ -71,7 +71,7 @@ export default function PageHeader({user, handleLogout}){
                         <List.Item className="nav-item">
                             <Header as='h3'>
                                 <Link 
-                                    style={path === user.username ? {color: "orange"} : {}}
+                                    style={path === user.username ? {color: "#9eb334"} : {}}
                                     className="link" as='h3' to={`/${user.username}`}> Profile </Link>
                             </Header>
                         </List.Item>
