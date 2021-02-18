@@ -31,7 +31,13 @@ export default function PageHeader({user, handleLogout}){
                         {user.isAdmin ?
                         <List.Item className="nav-item">
                             <Header as='h3'>
-                                    <Link style={{color: "green"}}className="link" to='/admin/posts/new'>New Admin Post</Link>
+                                    <Link 
+                                        style={path === "admin/posts/new" ? {color: "orange"} : {color: "green"}}
+                                        className="link" 
+                                        to='/admin/posts/new'
+                                    >
+                                        New Admin Post
+                                    </Link>
                             </Header>
                         </List.Item>
                         :
@@ -39,19 +45,34 @@ export default function PageHeader({user, handleLogout}){
                         }
                         <List.Item className="nav-item">
                             <Header as='h3'>
-                                {path === "plantswap/new" ? console.log("success") : console.log("failure")}
-                                <Link className="link" to='/plantswap/new'>{user.isAdmin ? "Post a Plant" : "Donate a Plant"}</Link>
+                                
+                                <Link 
+                                    style={path === "plantswap/new" ? {color: "orange"} : {}} 
+                                    className="link" 
+                                    to='/plantswap/new'
+                                >
+                                        {user.isAdmin ? "Post a Plant" : "Donate a Plant"}
+                                </Link> 
+                                
                                 
                             </Header>
                         </List.Item>
                         <List.Item className="nav-item">
                             <Header as='h3'>
-                                <Link className="link" to='/plantswap'>Find a Plant</Link>
+                                <Link 
+                                    style={path === "plantswap" ? {color: "orange"} : {}} 
+                                    className="link" 
+                                    to='/plantswap'
+                                >
+                                    Find a Plant
+                                </Link>
                             </Header>
                         </List.Item>
                         <List.Item className="nav-item">
                             <Header as='h3'>
-                                <Link className="link" as='h3' to={`/${user.username}`}> Profile </Link>
+                                <Link 
+                                    style={path === user.username ? {color: "orange"} : {}}
+                                    className="link" as='h3' to={`/${user.username}`}> Profile </Link>
                             </Header>
                         </List.Item>
                         <List.Item className="nav-item">
