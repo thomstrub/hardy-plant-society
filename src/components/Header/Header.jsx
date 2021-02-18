@@ -32,7 +32,7 @@ export default function PageHeader({user, handleLogout}){
                         <List.Item className="nav-item">
                             <Header as='h3'>
                                     <Link 
-                                        style={path === "admin/posts/new" ? {color: "orange"} : {color: "green"}}
+                                        style={path === "admin/posts/new" ? {fontWeight: "bold"} : {}}
                                         className="link" 
                                         to='/admin/posts/new'
                                     >
@@ -47,7 +47,7 @@ export default function PageHeader({user, handleLogout}){
                             <Header as='h3'>
                                 
                                 <Link 
-                                    style={path === "plantswap/new" ? {color: "#9eb334"} : {}} 
+                                    style={path === "plantswap/new" ? {fontWeight: "bold"} : {}} 
                                     className="link" 
                                     to='/plantswap/new'
                                 >
@@ -60,7 +60,7 @@ export default function PageHeader({user, handleLogout}){
                         <List.Item className="nav-item">
                             <Header as='h3'>
                                 <Link 
-                                    style={path === "plantswap" ? {color: "#9eb334"} : {}} 
+                                    style={path === "plantswap" ? {fontWeight: "bold"} : {}} 
                                     className="link" 
                                     to='/plantswap'
                                 >
@@ -71,7 +71,7 @@ export default function PageHeader({user, handleLogout}){
                         <List.Item className="nav-item">
                             <Header as='h3'>
                                 <Link 
-                                    style={path === user.username ? {color: "#9eb334"} : {}}
+                                    style={path === user.username ? {fontWeight: "bold"} : {}}
                                     className="link" as='h3' to={`/${user.username}`}> Profile </Link>
                             </Header>
                         </List.Item>
