@@ -1,9 +1,12 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import { Header, Segment, Icon, List, Grid } from 'semantic-ui-react';
 import './Header.css'
 
 export default function PageHeader({user, handleLogout}){
+    const history = useHistory();
+    const path = history.location.pathname.slice(1)
+    console.log(path, "path")
     return (
         <Segment clearing>
         <Grid centered>
