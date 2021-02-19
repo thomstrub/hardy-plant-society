@@ -8,7 +8,7 @@ export default function HeroSection(){
         
         
           
-        <Grid  className='hero' columns={1} verticalAlign={"middle"} style={{ color: "white", minHeight: 400, padding: '1em 0em' }}>
+        <Grid  className='hero' columns={1} verticalAlign={"middle"} style={{ color: "white", minHeight: "60vw", padding: '1em 0em', margin: "-58px 0 20px 0" }}>
             <Grid.Row>
                 <Grid.Column>
                 <h3 style={{marginLeft: "40%"}}>Welcome to the Pacific Northwest Hardy Plant Society</h3>
