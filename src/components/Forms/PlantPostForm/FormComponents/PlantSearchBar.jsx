@@ -20,15 +20,24 @@ export default function PlantSearchBar(props) {
   return (
     <>
         <h3> Find your plant to get started</h3>
+        <div style={{display: "inline-flex"}}>
         <Form.Input
+          style={{width:"45vw", marginRight: "12px"}}
+          size="huge"
           id="tagInput"
           type="text"
           value={searchTag}
           placeholder="Search common or scientific name"
           onChange={handleChange}
         />
-        <div id="div">
-        <Button  onClick={handleSubmit} value="Search" id="right">Search</Button>
+        <div id="div" >
+        <Button
+        style={{height: "55px"}}
+        size="huge" 
+        onClick={handleSubmit} 
+        value="Search" 
+        id="right">Search</Button>
+        </div>
         </div>
     </>
   );

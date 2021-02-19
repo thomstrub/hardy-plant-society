@@ -11,7 +11,12 @@ import { Button} from 'semantic-ui-react'
         <PlantSearchResults selected={selected} handlePlantPick={handlePlantPick} trefleData={trefleData}/>
         {trefleData ?
             <div id="div">
-        <Button  onClick={toggleFormPart} value="Next" id="right">Next</Button>
+        <Button 
+         size="huge"
+         color="green"
+         onClick={toggleFormPart} 
+         value="Next" 
+         id="right">Next</Button>
         </div>
         :
         ""

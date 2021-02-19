@@ -1,7 +1,8 @@
 import React from 'react'
+import './PlantPostForm.css'
 import RadioComponent from './FormComponents/RadioComponent'
 import SemanticDatepicker from 'react-semantic-ui-datepickers';
-import { Button, Checkbox, Form} from 'semantic-ui-react'
+import { Button, Checkbox, Form} from 'semantic-ui-react';
 
  export default function PlantPostFormPart2({toggleFormPart, user, handleToggle, radioToggle, state, handleChange, handleDate, handleForSaleChange, handleFileInput}){
      return(
@@ -76,13 +77,18 @@ import { Button, Checkbox, Form} from 'semantic-ui-react'
             name="photo"
             placeholder="upload image"
             onChange={handleFileInput}
-            />   
+            />  
+            <div id="div">
             <Button
+            color="green"
+            size="huge"
             type="submit"
-            className="btn"
+            id="right"
+            
             >
-            SUBMIT
+            Submit
             </Button>
+            </div> 
         </>
      )
  }
