@@ -23,16 +23,16 @@ export default function PageHeader({user, handleLogout}){
                     
                 </Header>
                 <Header floated="right" className="nav-container" >
-                <List style={{}} className="nav" horizontal>
+                <List style={{display: "grid"}} className="nav nav-parent" horizontal>
                    
                     
                     {user ?
                         <>
                         {user.isAdmin ?
-                        <List.Item className="nav-item">
+                        <List.Item className="">
                             <Header as='h3'>
                                     <Link 
-                                        style={path === "admin/posts/new" ? {fontWeight: "bold"} : {}}
+                                        style={path === "admin/posts/new" ? {fontWeight: "900"} : {}}
                                         className="link" 
                                         to='/admin/posts/new'
                                     >
@@ -43,11 +43,11 @@ export default function PageHeader({user, handleLogout}){
                         :
                         ''
                         }
-                        <List.Item className="nav-item">
+                        <List.Item className="">
                             <Header as='h3'>
                                 
                                 <Link 
-                                    style={path === "plantswap/new" ? {fontWeight: "bold"} : {}} 
+                                    style={path === "plantswap/new" ? {fontWeight: "900"} : {}} 
                                     className="link" 
                                     to='/plantswap/new'
                                 >
@@ -57,10 +57,10 @@ export default function PageHeader({user, handleLogout}){
                                 
                             </Header>
                         </List.Item>
-                        <List.Item className="nav-item">
+                        <List.Item className="">
                             <Header as='h3'>
                                 <Link 
-                                    style={path === "plantswap" ? {fontWeight: "bold"} : {}} 
+                                    style={path === "plantswap" ? {fontWeight: "900"} : {}} 
                                     className="link" 
                                     to='/plantswap'
                                 >
@@ -68,21 +68,21 @@ export default function PageHeader({user, handleLogout}){
                                 </Link>
                             </Header>
                         </List.Item>
-                        <List.Item className="nav-item">
+                        <List.Item className="">
                             <Header as='h3'>
                                 <Link 
-                                    style={path === user.username ? {fontWeight: "bold"} : {}}
+                                    style={path === user.username ? {fontWeight: "900"} : {}}
                                     className="link" as='h3' to={`/${user.username}`}> Profile </Link>
                             </Header>
                         </List.Item>
-                        <List.Item className="nav-item">
+                        <List.Item className="">
                             <Header as='h3'>
                                 <Link className="link" to='/login'onClick={handleLogout}>Logout</Link>
                             </Header>
                         </List.Item>
                         </>
                         :
-                        <List.Item className="nav-item">
+                        <List.Item className="">
                             <Header as='h3'>
                                 <Link className="link" to='/login'>Login</Link>
                                     
