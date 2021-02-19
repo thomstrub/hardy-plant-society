@@ -1,20 +1,19 @@
 
-.nav-container{
-    position: relative;
-}
-.nav{
-    display:flex;
-    vertical-align: bottom;
-    bottom: 0;  
-   
-}
+
+
 
 .logos{
     color: green;
 }
-.logos:hover{
-    font-weight: bold;
+.logos-hover:hover{
+    
     color: green;
+    border-bottom: 2.5px solid;
+    text-shadow:
+        2px 2px rgb(230, 250, 230),
+        2px -2px white,
+        -2px 2px white,
+        -2px -2px white;
 }
 
 .link{
@@ -25,13 +24,22 @@
 }
 
 .link:hover{
-    font-weight: bold;
+    border-bottom: 2.5px solid;
+    font-weight: bolder;
     color: green;
+    line-height: 0.85;
+    text-shadow:
+        2px 2px white,
+        2px -2px rgb(245, 241, 241),
+        -2px 2px white,
+        -2px -2px white;
 }
 
 .nav-parent{
+    width: 50vw;
+    margin-left: 30px;
     display: grid;
-    
+    gap: 1rem;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     /* 
     if we did this instead of the template it would be a problem:

@@ -12,18 +12,23 @@ export default function PageHeader({user, handleLogout}){
         <Grid centered>
         <Grid.Row>
             <Grid.Column style={{ maxWidth: 1150, margin: "30px 0 -20px 0"}}>
-                <Header style={{display: "flex", alignItems: "baseline"}} className="logos" color="green" as='h3' floated="left" >
+            
+                <div>
+                    <Header className="logos" color="green" as='h3' floated="left" >
+                        
+                        <Link style={{color: "green"}} to="/"><Icon name="leaf"></Icon></Link>
+                        
+                    </Header>
+                    <Header style={{marginLeft: "-15px"}} className="logos" as={Link} to="/" floated="left" >
                     
-                    <Link className="link" to="/"><Icon name="leaf"></Icon></Link>
-                    
-                </Header>
-                <Header style={{marginLeft: "-15px"}} className="logos" as={Link} to="/" floated="left" >
-                
-                <h3 className="logos">Hardy Plant Society Northwest</h3>
-                    
-                </Header>
+                    <h3 className="logos logos-hover">Hardy Plant Society Northwest</h3>
+                        
+                    </Header>
+                </div>
+
                 <Header floated="right" className="nav-container" >
-                <List style={{display: "grid"}} className="nav nav-parent" horizontal>
+                
+                <List style={{display: "grid"}} className="nav-parent" horizontal>
                    
                     
                     {user ?
