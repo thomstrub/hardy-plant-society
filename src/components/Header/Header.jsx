@@ -11,19 +11,19 @@ export default function PageHeader({user, handleLogout}){
         <Segment clearing style={{marginBottom: "30px"}}>
         <Grid centered>
         <Grid.Row>
-            <Grid.Column style={{ maxWidth: 1150, marginTop: "20px"}}>
-                <Header style={{marginBottom: "-20px"}} className="logo" color="green" as='h3' floated="left" >
+            <Grid.Column style={{ maxWidth: 1150, margin: "30px 0 -20px 0"}}>
+                <Header style={{display: "flex", alignItems: "baseline"}} className="logos" color="green" as='h3' floated="left" >
                     
                     <Link className="link" to="/"><Icon name="leaf"></Icon></Link>
                     
                 </Header>
-                <Header style={{marginBottom: "-20px", marginLeft: "-15px"}} className="logo" as={Link} to="/" floated="left" >
+                <Header style={{marginLeft: "-15px"}} className="logos" as={Link} to="/" floated="left" >
                 
-                <h3 style={{color: "green"}}>Hardy Plant Society Northwest</h3>
+                <h3 className="logos">Hardy Plant Society Northwest</h3>
                     
                 </Header>
                 <Header floated="right" className="nav-container" >
-                <List style={{marginBottom: "-20px"}} className="nav" horizontal>
+                <List style={{}} className="nav" horizontal>
                    
                     
                     {user ?

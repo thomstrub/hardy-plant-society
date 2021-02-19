@@ -5,15 +5,15 @@
 .nav{
     display:flex;
     vertical-align: bottom;
-    bottom: 0;
-    
-   
-    
+    bottom: 0;  
    
 }
 
-.logo{
-    margin-top: 20px;
+.logos{
+    color: green;
+}
+.logos:hover{
+    color: #7b8c29;
 }
 
 .link{
@@ -21,4 +21,8 @@
     font-weight: 500;
     letter-spacing: .2px;   
     color: green;
+}
+
+.link:hover{
+    color: #7b8c29;
 }
