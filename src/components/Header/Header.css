@@ -13,7 +13,8 @@
     color: green;
 }
 .logos:hover{
-    color: #7b8c29;
+    font-weight: bold;
+    color: green;
 }
 
 .link{
@@ -24,5 +25,6 @@
 }
 
 .link:hover{
-    color: #7b8c29;
+    font-weight: bold;
+    color: green;
 }
