@@ -13,7 +13,7 @@ export default function HeroSection({user}){
                 <Grid.Column>
                 <h3 style={{marginLeft: "40%"}}>Welcome to the Pacific Northwest Hardy Plant Society</h3>
         
-                <Button as={Link} to={user === null ? "/login" : "/plantswap"} style={{backgroundColor: "green", marginLeft: "60%"}} primary size='huge'>
+                <Button as={Link} to={user === null ? "/login" : "/plantswap"} style={{backgroundColor: "green", marginLeft: "51%"}} primary size='huge'>
                 {user === null ? "Log In" : "Find a Plant"}
                 <Icon name='right arrow' />
                 </Button>
