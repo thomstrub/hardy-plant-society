@@ -8,7 +8,7 @@
 .logos-hover:hover{
     
     color: green;
-    border-bottom: 2.5px solid;
+    
     text-shadow:
         2px 2px rgb(230, 250, 230),
         2px -2px white,
@@ -24,7 +24,7 @@
 }
 
 .link:hover{
-    border-bottom: 2.5px solid;
+    
     font-weight: bolder;
     color: green;
     line-height: 0.85;
