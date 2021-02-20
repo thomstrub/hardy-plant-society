@@ -48,3 +48,17 @@
     text-align: center;
     
 }
+
+.admin-nav{
+    width: 60vw;
+    margin-left: 30px;
+    display: grid;
+    gap: .2rem;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    /* 
+    if we did this instead of the template it would be a problem:
+    grid-auto-flow: column;
+    */
+    text-align: center;
+    
+}

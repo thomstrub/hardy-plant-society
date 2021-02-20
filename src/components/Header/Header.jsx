@@ -28,7 +28,7 @@ export default function PageHeader({user, handleLogout}){
 
                 <Header floated="right" className="nav-container" >
                 
-                <List style={{display: "grid"}} className="nav-parent" horizontal>
+                <List style={{display: "grid"}} className={user.isAdmin ? "admin-nav" : "nav-parent"} horizontal>
                    
                     
                     {user ?
@@ -87,16 +87,14 @@ export default function PageHeader({user, handleLogout}){
                         </List.Item>
                         </>
                         :
-                        <List.Item className="">
-                            <Header as='h3'>
-                                <Link className="link" to='/login'>Login</Link>
-                                    
-                            </Header>
-                        </List.Item>
+                        
+                       ""
                         }
                         
                     
                 </List>
+
+
                         
                 </Header>
                 
