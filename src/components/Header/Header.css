@@ -9,11 +9,7 @@
     
     color: green;
     
-    text-shadow:
-        2px 2px rgb(230, 250, 230),
-        2px -2px white,
-        -2px 2px white,
-        -2px -2px white;
+    
 }
 
 .link{
@@ -28,11 +24,7 @@
     font-weight: bolder;
     color: green;
     line-height: 0.85;
-    text-shadow:
-        2px 2px white,
-        2px -2px rgb(245, 241, 241),
-        -2px 2px white,
-        -2px -2px white;
+    
 }
 
 .nav-parent{
@@ -40,7 +32,7 @@
     margin-left: 30px;
     display: grid;
     gap: 1rem;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 11vw));
     /* 
     if we did this instead of the template it would be a problem:
     grid-auto-flow: column;
@@ -51,10 +43,10 @@
 
 .admin-nav{
     width: 60vw;
-    margin-left: 30px;
+    
     display: grid;
-    gap: .2rem;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    
+    grid-template-columns: repeat(5, minmax(0, 11vw));
     /* 
     if we did this instead of the template it would be a problem:
     grid-auto-flow: column;
