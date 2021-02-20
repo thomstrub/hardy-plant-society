@@ -28,11 +28,12 @@ export default function PageHeader({user, handleLogout}){
 
                 <Header floated="right" className="nav-container" >
                 
-                <List style={{display: "grid"}} className={user.isAdmin ? "admin-nav" : "nav-parent"} horizontal>
+                
                    
                     
                     {user ?
                         <>
+                        <List style={{display: "grid"}} className={user.isAdmin ? "admin-nav" : "nav-parent"} horizontal>
                         {user.isAdmin ?
                         <List.Item className="">
                             <Header as='h3'>
@@ -85,14 +86,15 @@ export default function PageHeader({user, handleLogout}){
                                 <Link className="link" to='/login'onClick={handleLogout}>Logout</Link>
                             </Header>
                         </List.Item>
+                        </List>
                         </>
                         :
                         
-                       ""
+                       <div></div>
                         }
                         
                     
-                </List>
+                
 
 
                         
