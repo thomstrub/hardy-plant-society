@@ -62,7 +62,7 @@ export default function PlantPostForm(props){
        getTrefleData(searchTag)
    }, [searchTag])
   
-
+  //
   // useEffect needed to update state due to asynchronous nature of setState
   useEffect(() => {
     setState({
