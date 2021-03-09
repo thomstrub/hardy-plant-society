@@ -45,7 +45,6 @@ export default function PlantPostForm(props){
    
    try {
      const data = await plantPostAPI.searchTrefle(search);
-     console.log(data.json.data, "data from postform page")
      setTrefleData([...data.json.data])
    } catch(err){
      console.log(err, ' this is the error')
@@ -72,7 +71,6 @@ export default function PlantPostForm(props){
     e.preventDefault()
     
     setSelected(e.target.id);
-    console.log("Selected", selected)
      setState({
         ...state,
         plant: e.target.id
