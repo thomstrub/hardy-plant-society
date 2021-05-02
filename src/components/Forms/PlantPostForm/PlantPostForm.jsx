@@ -161,7 +161,7 @@ export default function PlantPostForm(props){
   return (
     
   
-        <Segment>
+        <Segment style={{width: "58vw"}} >
         
             <Form  autoComplete="off" onSubmit={handleSubmit}>
             <div hidden={!state.partOne}><PlantPostFormPart1 selected={state.plant} handlePlantPick={handlePlantPick} toggleFormPart={toggleFormPart} handleTrefleSubmit={handleTrefleSubmit} trefleData={trefleData} /></div>

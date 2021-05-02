@@ -30,14 +30,14 @@ export default function PlantSearchBar(props) {
           placeholder="Search common or scientific name"
           onChange={handleChange}
         />
-        <div id="div" >
+        
         <Button
         style={{height: "55px"}}
         size="huge" 
         onClick={handleSubmit} 
         value="Search" 
         id="right">Search</Button>
-        </div>
+        
         </div>
     </>
   );
